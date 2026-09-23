@@ -1,0 +1,68 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="img/download (1).jpg" type="image/jpeg">
+    <title>Iron_Box | Home</title>
+    <!-- Ícones Bootstrap -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+    <!-- CSS local -->
+    <link rel="stylesheet" href="{% static 'css/layout.css' %}">
+</head>
+
+<body style="background-color: rgb(234, 198, 255);">
+    <main class="pg-container">
+        <nav class="menu" id="menu">
+            <div class="logo">
+                <h2>Iron Box</h2>
+            </div>
+            <ul>
+                <li><a href="#"> <i class="bi bi-house-heart-fill"></i><span> Home</span></a></li>
+                <li><a href="#sobre"><i class="bi bi-clipboard-heart-fill"></i><span> Sobre nós</span></a></li>
+                <li><a href="{% url 'login' %}"><i class="bi bi-arrow-through-heart-fill"></i>
+                <span> Entrar</span>
+    </a>
+</li>
+                <li><a href="{% url 'contato' %}"><i class="bi bi-person-heart"></i><span> Contato</span></a></li>
+            </ul>
+        </nav>
+
+        <div class="conteudo">
+            <section class="page-title page-title-full">
+                <h1>Energia que impulsiona seus resultados</h1>
+                <p>Suplementos de qualidade para elevar sua performance e transformar seu treino!</p>
+            </section>
+
+            <section id="sobre" class="sessao">
+                <h2>Sobre nós</h2>
+                <p>
+                     Na Iron Box, acreditamos que cada treino é uma oportunidade de superar limites e evoluir. Somos mais do que uma marca de suplementos: somos parceiros na sua jornada em busca de força, saúde e alta performance.
+                    Trabalhamos com produtos de qualidade, pensados para quem leva o treino a sério e busca resultados reais. Nosso compromisso é oferecer suplementos confiáveis, que auxiliem no ganho de energia, resistência e recuperação muscular.
+                    A Iron Box nasceu com o propósito de motivar pessoas a alcançarem sua melhor versão, dentro e fora da academia. Aqui, disciplina, foco e determinação fazem parte do nosso DNA.
+                    Junte-se a nós e leve seu desempenho para o próximo nível.
+                </p>
+            </section>
+
+            <!-- Seção de Produtos -->
+            <section class="produtos">
+                <h2 class="titulo-produtos">Produtos</h2>
+                <div class="galeria">
+                    <img src="{% static 'img/perfil/WhatsApp Image 2026-03-30 at 09.42.04.jpeg' %}" alt="Produto 1">
+                    <img src="{% static 'img/perfil/WhatsApp Image 2026-03-30 at 09.42.04 (1).jpeg' %}" alt="Produto 2">
+                    <img src="{% static 'img/perfil/WhatsApp Image 2026-03-30 at 09.42.03.jpeg' %}" alt="Produto 3">
+                </div>
+             </section>
+           </div>
+    </main>
+        <footer class="footer">
+        <p class="footer-bottom">IronBox</p>
+            <p>&copy; 2026 Iron Box. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+</body>
+</html>
+
+
+

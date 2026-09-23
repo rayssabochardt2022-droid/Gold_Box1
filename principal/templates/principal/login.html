@@ -1,0 +1,114 @@
+{% load static %}
+
+<!DOCTYPE html>
+
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+<title>IronBox - Entrar</title>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+<link rel="stylesheet" href="{% static 'css/layout.css' %}">
+
+
+</head>
+
+<body class="contact-page">
+
+<main class="pg-container">
+
+    <nav class="menu">
+        <div class="logo">
+            <p>Iron<span>Box</span></p>
+        </div>
+
+        <ul>
+            <li>
+                <a href="{% url 'home' %}">
+                    <i class="bi bi-house-heart-fill"></i>
+                    <span>Home</span>
+                </a>
+            </li>
+
+            <li>
+                <a href="{% url 'home' %}#sobre">
+                    <i class="bi bi-clipboard-heart-fill"></i>
+                    <span>Sobre</span>
+                </a>
+            </li>
+
+            <li>
+                <a href="{% url 'login' %}">
+                    <i class="bi bi-arrow-through-heart-fill"></i>
+                    <span>Entrar</span>
+                </a>
+            </li>
+
+            <li>
+                <a href="{% url 'contato' %}">
+                    <i class="bi bi-person-heart"></i>
+                    <span>Contato</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+
+    <div class="conteudo">
+
+        <section class="sessao form-section">
+
+            <h2>Entrar</h2>
+
+            <p>Entre na sua conta da IronBox.</p>
+
+            {% if form.errors %}
+                <p style="color: red;">
+                    Usuário ou senha incorretos.
+                </p>
+            {% endif %}
+
+            <div class="form-container">
+
+                <form method="post">
+                    {% csrf_token %}
+
+                    <div>
+                        <label for="id_username">Usuário</label>
+                        <input
+                            type="text"
+                            name="username"
+                            id="id_username"
+                            placeholder="Digite seu usuário"
+                            required
+                        >
+                    </div>
+
+                    <div>
+                        <label for="id_password">Senha</label>
+                        <input
+                            type="password"
+                            name="password"
+                            id="id_password"
+                            placeholder="Digite sua senha"
+                            required
+                        >
+                    </div>
+
+                    <input type="submit" value="Entrar">
+
+                </form>
+
+            </div>
+
+        </section>
+
+    </div>
+
+</main>
+
+
+</body>
+</html>
