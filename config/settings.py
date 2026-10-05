@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     'contas',
     'produtos',
     'pedidos',
-    'institucional',
+
 ]
 
 MIDDLEWARE = [
