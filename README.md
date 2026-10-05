@@ -10,11 +10,11 @@ Projeto Integrador desenvolvido em Django para criação de um sistema web de um
 
 O **Gold Box** é um sistema web de uma loja de suplementos alimentares, desenvolvido utilizando o framework Django.
 
-O sistema terá como objetivo permitir que os clientes conheçam os produtos disponíveis, realizem cadastro e login, consultem o catálogo, adicionem produtos ao carrinho e realizem pedidos.
+O sistema terá como objetivo permitir que os clientes conheçam os produtos disponíveis, realizem cadastro e login, consultem o catálogo e tenham acesso a conteúdos e informações relacionadas a suplementos alimentares.
 
-Além da área destinada aos clientes, o sistema contará com funcionalidades administrativas para gerenciamento dos produtos e pedidos.
+Além da área destinada aos clientes, o sistema contará com funcionalidades administrativas para gerenciamento dos produtos e das publicações do blog.
 
-O projeto busca solucionar a necessidade de uma loja de suplementos possuir uma plataforma online para divulgar seus produtos e facilitar o processo de compra e atendimento aos clientes.
+O projeto busca solucionar a necessidade de uma loja de suplementos possuir uma plataforma online para divulgar seus produtos, apresentar informações aos clientes e facilitar o acesso aos conteúdos da loja.
 
 O sistema será desenvolvido inicialmente com as seguintes funcionalidades:
 
@@ -24,9 +24,9 @@ O sistema será desenvolvido inicialmente com as seguintes funcionalidades:
 * Catálogo de produtos;
 * Categorias de produtos;
 * Cadastro e gerenciamento de produtos;
-* Carrinho de compras;
-* Criação de pedidos;
-* Visualização dos pedidos;
+* Blog com dicas e informações;
+* Cadastro e gerenciamento de publicações;
+* Visualização das publicações;
 * Página de contato;
 * Área administrativa.
 
@@ -44,12 +44,12 @@ As principais tecnologias utilizadas no desenvolvimento do projeto serão:
 
 ## Equipe
 
-| Integrante          | Responsabilidade                                                                               |
-| ------------------- | ---------------------------------------------------------------------------------------------- |
-| **João Vitor Vaz**  | Desenvolvimento do app `contas`, responsável pelo cadastro, login e autenticação dos usuários. |
-| **Davi Honorato**   | Desenvolvimento do app `produtos`, responsável pelo catálogo, produtos e categorias.           |
-| **Lucas Da Silva**  | Desenvolvimento do app `pedidos`, responsável pelo carrinho e gerenciamento dos pedidos.       |
-| **Rayssa Borchatd** | Desenvolvimento do app `institucional`, responsável pela página inicial e página de contato.   |
+| **Integrante**      | **Responsabilidade**                                                                                 |
+| ------------------- | ---------------------------------------------------------------------------------------------------- |
+| **João Vitor Vaz**  | Desenvolvimento do app `contas`, responsável pelo cadastro, login e autenticação dos usuários.       |
+| **Davi Honorato**   | Desenvolvimento do app `produtos`, responsável pelo catálogo, produtos e categorias.                 |
+| **Lucas Da Silva**  | Desenvolvimento do app `blog`, responsável pelas publicações, dicas e informações sobre suplementos. |
+| **Rayssa Borchatd** | Desenvolvimento do app `institucional`, responsável pela página inicial e página de contato.         |
 
 ## Apps Django
 
@@ -80,17 +80,18 @@ Principais funcionalidades:
 * Exclusão de produtos;
 * Cadastro e organização por categorias.
 
-### `pedidos`
+### `blog`
 
-Responsável pelas funcionalidades relacionadas às compras realizadas pelos clientes.
+Responsável pelas publicações e conteúdos informativos da loja.
 
 Principais funcionalidades:
 
-* Carrinho de compras;
-* Adição de produtos ao carrinho;
-* Criação de pedidos;
-* Visualização dos pedidos;
-* Resumo do pedido.
+* Cadastro de publicações;
+* Listagem de publicações;
+* Visualização dos detalhes;
+* Edição de publicações;
+* Exclusão de publicações;
+* Divulgação de dicas e informações sobre suplementos.
 
 ### `institucional`
 
@@ -137,17 +138,19 @@ Principais funcionalidades:
 
 **Responsável:** Davi Honorato.
 
-### App `pedidos`
+### App `blog`
 
 **Models:**
 
-* `Pedido` — representa um pedido realizado por um cliente;
-* `ItemPedido` — representa os produtos presentes em cada pedido.
+* `Publicacao` — representa uma publicação realizada no blog.
 
 **Views:**
 
-* `pedido_create` — responsável pela criação do pedido;
-* `pedido_detail` — apresenta os detalhes do pedido.
+* `post_list` — lista as publicações;
+* `post_detail` — apresenta os detalhes de uma publicação;
+* `post_create` — realiza o cadastro de publicações;
+* `post_update` — realiza a edição de publicações;
+* `post_delete` — realiza a exclusão de publicações.
 
 **Responsável:** Lucas Da Silva.
 
@@ -218,30 +221,35 @@ Responsabilidades:
 * Desenvolver a organização por categorias;
 * Configurar o gerenciamento dos produtos no Django Admin.
 
-### Lucas Da Silva — App `pedidos`
+### Lucas Da Silva — App `blog`
 
 Arquivos principais:
 
 ```text
-pedidos/
+blog/
 ├── models.py
 ├── views.py
 ├── forms.py
 ├── urls.py
+├── admin.py
 └── templates/
-    └── pedidos/
-        ├── carrinho.html
-        ├── pedido_form.html
-        └── pedido_detail.html
+    └── blog/
+        ├── post_list.html
+        ├── post_detail.html
+        ├── post_form.html
+        └── post_confirm_delete.html
 ```
 
 Responsabilidades:
 
-* Desenvolver o carrinho;
-* Criar os Models `Pedido` e `ItemPedido`;
-* Desenvolver a criação de pedidos;
-* Desenvolver a visualização dos pedidos;
-* Implementar o resumo dos produtos comprados.
+* Desenvolver o Blog;
+* Criar o Model `Publicacao`;
+* Criar o cadastro de publicações;
+* Criar edição e exclusão de publicações;
+* Desenvolver a listagem das publicações;
+* Desenvolver a visualização dos detalhes;
+* Criar conteúdos com dicas e informações sobre suplementos;
+* Configurar o gerenciamento das publicações no Django Admin.
 
 ### Rayssa Borchatd — App `institucional`
 
@@ -299,11 +307,12 @@ Gold_Box/
 │   ├── urls.py
 │   └── templates/
 │
-├── pedidos/
+├── blog/
 │   ├── models.py
 │   ├── views.py
 │   ├── forms.py
 │   ├── urls.py
+│   ├── admin.py
 │   └── templates/
 │
 ├── institucional/
