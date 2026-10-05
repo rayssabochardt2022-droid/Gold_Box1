@@ -7,11 +7,11 @@ Projeto Integrador desenvolvido em Django para criação de um sistema web de um
 Descrição do Projeto
 O Gold Box é um sistema web de uma loja de suplementos alimentares, desenvolvido utilizando o framework Django.
 
-O sistema terá como objetivo permitir que os clientes conheçam os produtos disponíveis, realizem cadastro e login, consultem o catálogo e tenham acesso a conteúdos e informações relacionadas a suplementos alimentares.
+O sistema terá como objetivo permitir que os clientes conheçam os produtos disponíveis, realizem cadastro e login, consultem o catálogo, adicionem produtos ao carrinho e realizem pedidos.
 
-Além da área destinada aos clientes, o sistema contará com funcionalidades administrativas para gerenciamento dos produtos e das publicações do blog.
+Além da área destinada aos clientes, o sistema contará com funcionalidades administrativas para gerenciamento dos produtos e pedidos.
 
-O projeto busca solucionar a necessidade de uma loja de suplementos possuir uma plataforma online para divulgar seus produtos, apresentar informações aos clientes e facilitar o acesso aos conteúdos da loja.
+O projeto busca solucionar a necessidade de uma loja de suplementos possuir uma plataforma online para divulgar seus produtos e facilitar o processo de compra e atendimento aos clientes.
 
 O sistema será desenvolvido inicialmente com as seguintes funcionalidades:
 
@@ -21,9 +21,9 @@ Login e logout;
 Catálogo de produtos;
 Categorias de produtos;
 Cadastro e gerenciamento de produtos;
-Blog com dicas e informações;
-Cadastro e gerenciamento de publicações;
-Visualização das publicações;
+Carrinho de compras;
+Criação de pedidos;
+Visualização dos pedidos;
 Página de contato;
 Área administrativa.
 Tecnologias Utilizadas
@@ -40,7 +40,7 @@ Equipe
 Integrante	Responsabilidade
 João Vitor Vaz	Desenvolvimento do app contas, responsável pelo cadastro, login e autenticação dos usuários.
 Davi Honorato	Desenvolvimento do app produtos, responsável pelo catálogo, produtos e categorias.
-Lucas Da Silva	Desenvolvimento do app blog, responsável pelas publicações, dicas e informações sobre suplementos.
+Lucas Da Silva	Desenvolvimento do app pedidos, responsável pelo carrinho e gerenciamento dos pedidos.
 Rayssa Borchatd	Desenvolvimento do app institucional, responsável pela página inicial e página de contato.
 Apps Django
 O projeto será dividido em quatro aplicativos Django, cada um responsável por uma parte específica do sistema.
@@ -66,17 +66,16 @@ Visualização dos detalhes;
 Edição de produtos;
 Exclusão de produtos;
 Cadastro e organização por categorias.
-blog
-Responsável pelas publicações e conteúdos informativos da loja.
+pedidos
+Responsável pelas funcionalidades relacionadas às compras realizadas pelos clientes.
 
 Principais funcionalidades:
 
-Cadastro de publicações;
-Listagem de publicações;
-Visualização dos detalhes;
-Edição de publicações;
-Exclusão de publicações;
-Divulgação de dicas e informações sobre suplementos.
+Carrinho de compras;
+Adição de produtos ao carrinho;
+Criação de pedidos;
+Visualização dos pedidos;
+Resumo do pedido.
 institucional
 Responsável pelas páginas institucionais do sistema.
 
@@ -113,17 +112,15 @@ produto_update — realiza a edição de produtos;
 produto_delete — realiza a exclusão de produtos.
 Responsável: Davi Honorato.
 
-App blog
+App pedidos
 Models:
 
-Publicacao — representa uma publicação realizada no blog.
+Pedido — representa um pedido realizado por um cliente;
+ItemPedido — representa os produtos presentes em cada pedido.
 Views:
 
-post_list — lista as publicações;
-post_detail — apresenta os detalhes de uma publicação;
-post_create — realiza o cadastro de publicações;
-post_update — realiza a edição de publicações;
-post_delete — realiza a exclusão de publicações.
+pedido_create — responsável pela criação do pedido;
+pedido_detail — apresenta os detalhes do pedido.
 Responsável: Lucas Da Silva.
 
 App institucional
@@ -179,31 +176,26 @@ Criar o cadastro de produtos;
 Criar edição e exclusão de produtos;
 Desenvolver a organização por categorias;
 Configurar o gerenciamento dos produtos no Django Admin.
-Lucas Da Silva — App blog
+Lucas Da Silva — App pedidos
 Arquivos principais:
 
-blog/
+pedidos/
 ├── models.py
 ├── views.py
 ├── forms.py
 ├── urls.py
-├── admin.py
 └── templates/
-    └── blog/
-        ├── post_list.html
-        ├── post_detail.html
-        ├── post_form.html
-        └── post_confirm_delete.html
+    └── pedidos/
+        ├── carrinho.html
+        ├── pedido_form.html
+        └── pedido_detail.html
 Responsabilidades:
 
-Desenvolver o Blog;
-Criar o Model Publicacao;
-Criar o cadastro de publicações;
-Criar edição e exclusão de publicações;
-Desenvolver a listagem das publicações;
-Desenvolver a visualização dos detalhes;
-Criar conteúdos com dicas e informações sobre suplementos;
-Configurar o gerenciamento das publicações no Django Admin.
+Desenvolver o carrinho;
+Criar os Models Pedido e ItemPedido;
+Desenvolver a criação de pedidos;
+Desenvolver a visualização dos pedidos;
+Implementar o resumo dos produtos comprados.
 Rayssa Borchatd — App institucional
 Arquivos principais:
 
@@ -253,12 +245,11 @@ Gold_Box/
 │   ├── urls.py
 │   └── templates/
 │
-├── blog/
+├── pedidos/
 │   ├── models.py
 │   ├── views.py
 │   ├── forms.py
 │   ├── urls.py
-│   ├── admin.py
 │   └── templates/
 │
 ├── institucional/
