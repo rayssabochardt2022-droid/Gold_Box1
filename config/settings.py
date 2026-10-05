@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'principal',
     'contas',
     'produtos',
-    'pedidos',
+    'blog',
 
 ]
 
