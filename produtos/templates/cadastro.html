@@ -1,0 +1,56 @@
+{% extends 'principal/index.html' %}
+
+{% block title %} Cadastro Produtos {% endblock %}
+
+{% block content %}
+
+{% if messages %}
+    {% for message in messages %}
+        <div class="alert alert-{{ message.tags }}">
+            {{ message }}
+        </div>
+    {% endfor %}
+{% endif %}
+
+<h2 class="mb-3">Cadastro Produtos</h2>
+<div class="table-responsive">
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Nome</th>
+            <th>Preço</th>
+            <th>Imagem</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for produtoc in produtosc %}
+        <tr>
+            <td>{{ produtoc.nome }}</td>
+            <td>{{ produtoc.preco }}</td>
+            <td>{{ produtoc.imagem|default:"-" }}</td>
+            <td>
+                <a href="{% url 'produtos:produto_detalhe' pk=produtoc.pk %}" class="btn btn-info btn-sm"> <i class="bi bi-eye-fill"></i></a>
+                <a href="{% url 'produtos:produto_editar' pk=produtoc.pk %}" class="btn btn-info btn-sm"> <i class="bi bi-pencil-square"></i></a>
+                <form action="{% url 'produtos:produto_excluir' pk=produtoc.pk %}"
+                      method="POST"
+                      onsubmit="return confirm('Deseja realmente excluir o produto {{ produtoc.nome }}?')">
+
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger btn-sm"><i class="bi bi-trash"></i></button>
+                </form>
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="5" class="text-center">
+                nenhum produto cadastrado.
+            </td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+</div>
+<a href="{% url 'produtos:produto_novo' %}" class="btn btn-success mt-4">Novo Produto</a>
+
+{% endblock%}
