@@ -1,0 +1,41 @@
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog | Gold Box</title>
+</head>
+<body>
+    <header>
+        <h1>Gold Box</h1>
+        <p>Blog de informações e novidades</p>
+    </header>
+
+    <main>
+        <h2>Publicações</h2>
+
+        {% for publicacao in publicacoes %}
+            <article>
+                <h3>
+                    <a href="{% url 'blog:post_detail' publicacao.pk %}">
+                        {{ publicacao.titulo }}
+                    </a>
+                </h3>
+
+                <p>{{ publicacao.resumo }}</p>
+                <small>Autor: {{ publicacao.autor }}</small>
+            </article>
+            <hr>
+        {% empty %}
+            <p>Nenhuma publicação disponível no momento.</p>
+        {% endfor %}
+
+        {% if user.is_authenticated %}
+            <a href="{% url 'blog:post_create' %}">
+                Criar publicação
+            </a>
+        {% endif %}
+    </main>
+</body>
+</html>
