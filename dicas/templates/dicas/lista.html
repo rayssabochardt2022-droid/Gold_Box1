@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Dicas | Gold Box</title>
+</head>
+
+<body>
+
+    <h1>Dicas da Gold Box</h1>
+
+    <a href="{% url 'cadastrar_dica' %}">
+        Cadastrar nova dica
+    </a>
+
+    <hr>
+
+    {% if dicas %}
+
+        {% for dica in dicas %}
+
+            <article>
+
+                <h2>{{ dica.titulo }}</h2>
+
+                <p>
+                    {{ dica.conteudo }}
+                </p>
+
+                <p>
+                    <strong>Categoria:</strong>
+                    {{ dica.categoria }}
+                </p>
+
+                <p>
+                    <strong>Data de publicação:</strong>
+                    {{ dica.data_criacao|date:"d/m/Y" }}
+                </p>
+
+            </article>
+
+            <hr>
+
+        {% endfor %}
+
+    {% else %}
+
+        <p>Nenhuma dica cadastrada ainda.</p>
+
+        <a href="{% url 'cadastrar_dica' %}">
+            Cadastrar primeira dica
+        </a>
+
+    {% endif %}
+
+</body>
+
+</html>
