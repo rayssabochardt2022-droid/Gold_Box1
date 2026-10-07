@@ -1,10 +1,78 @@
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>{{ publicacao.titulo }} | Gold Box</title>
 </head>
+
 <body>
 
+    <header>
+        <h1>Gold Box</h1>
+        <p>Blog</p>
+    </header>
+
+    <main>
+
+        <article>
+
+            <h2>{{ publicacao.titulo }}</h2>
+
+            <p>
+                <strong>Resumo:</strong>
+                {{ publicacao.resumo }}
+            </p>
+
+            <p>
+                <strong>Autor:</strong>
+                {{ publicacao.autor }}
+            </p>
+
+            <p>
+                <strong>Data:</strong>
+                {{ publicacao.data_criacao|date:"d/m/Y H:i" }}
+            </p>
+
+            <hr>
+
+            <section>
+                <h3>Conteúdo</h3>
+
+                <div>
+                    {{ publicacao.conteudo|linebreaks }}
+                </div>
+            </section>
+
+            <hr>
+
+            <nav>
+
+                <a href="{% url 'blog:post_list' %}">
+                    Voltar para o blog
+                </a>
+
+                {% if user.is_staff %}
+
+                    <a href="{% url 'blog:post_update' publicacao.pk %}">
+                        Editar publicação
+                    </a>
+
+                    <a href="{% url 'blog:post_delete' publicacao.pk %}">
+                        Excluir publicação
+                    </a>
+
+                {% endif %}
+
+            </nav>
+
+        </article>
+
+    </main>
+
 </body>
+
 </html>

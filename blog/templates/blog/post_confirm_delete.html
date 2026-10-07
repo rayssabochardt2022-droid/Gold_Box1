@@ -1,10 +1,48 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Excluir publicação | Gold Box</title>
 </head>
+
 <body>
 
+    <header>
+        <h1>Gold Box</h1>
+        <p>Blog</p>
+    </header>
+
+    <main>
+
+        <h2>Excluir publicação</h2>
+
+        <p>
+            Tem certeza que deseja excluir esta publicação?
+        </p>
+
+        <h3>
+            {{ publicacao.titulo }}
+        </h3>
+
+        <form method="post">
+
+            {% csrf_token %}
+
+            <button type="submit">
+                Sim, excluir
+            </button>
+
+            <a href="{% url 'blog:post_detail' publicacao.pk %}">
+                Cancelar
+            </a>
+
+        </form>
+
+    </main>
+
 </body>
+
 </html>
