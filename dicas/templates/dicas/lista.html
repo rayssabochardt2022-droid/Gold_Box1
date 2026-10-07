@@ -24,7 +24,15 @@
 
             <article>
 
-                <h2>{{ dica.titulo }}</h2>
+                <div style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+
+                    <h2>{{ dica.titulo }}</h2>
+
+                    <a href="{% url 'editar_dica' dica.pk %}">
+                        Editar
+                    </a>
+
+                </div>
 
                 <p>
                     {{ dica.conteudo }}

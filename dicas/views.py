@@ -2,7 +2,7 @@ from django.shortcuts import render
 
 # Create your views here.
 
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .models import Dica
 
 
@@ -26,3 +26,18 @@ def cadastrar_dica(request):
         return redirect('lista_dicas')
 
     return render(request, 'dicas/cadastrar.html')
+
+
+def editar_dica(request, pk):
+    dica = get_object_or_404(Dica, pk=pk)
+
+    if request.method == 'POST':
+        dica.titulo = request.POST.get('titulo')
+        dica.conteudo = request.POST.get('conteudo')
+        dica.categoria = request.POST.get('categoria')
+
+        dica.save()
+
+        return redirect('lista_dicas')
+
+    return render(request, 'dicas/editar.html', {'dica': dica})

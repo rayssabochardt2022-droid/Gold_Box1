@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Editar Dica | Gold Box</title>
+</head>
+
+<body>
+
+    <h1>Editar dica</h1>
+
+    <form method="post">
+
+        {% csrf_token %}
+
+        <div>
+            <label for="titulo">Título:</label>
+            <br>
+            <input
+                type="text"
+                id="titulo"
+                name="titulo"
+                value="{{ dica.titulo }}"
+                required
+            >
+        </div>
+
+        <br>
+
+        <div>
+            <label for="conteudo">Conteúdo:</label>
+            <br>
+            <textarea
+                id="conteudo"
+                name="conteudo"
+                rows="6"
+                required
+            >{{ dica.conteudo }}</textarea>
+        </div>
+
+        <br>
+
+        <div>
+            <label for="categoria">Categoria:</label>
+            <br>
+            <input
+                type="text"
+                id="categoria"
+                name="categoria"
+                value="{{ dica.categoria }}"
+                required
+            >
+        </div>
+
+        <br>
+
+        <button type="submit">
+            Salvar alterações
+        </button>
+
+    </form>
+
+    <br>
+
+    <a href="{% url 'lista_dicas' %}">
+        Voltar para dicas
+    </a>
+
+</body>
+
+</html>
