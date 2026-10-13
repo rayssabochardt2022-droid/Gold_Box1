@@ -1,41 +1,71 @@
 
+{% load static %}
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Blog | Gold Box</title>
+    <link rel="stylesheet" href="{% static 'blog/css/blog.css' %}">
 </head>
 <body>
-    <header>
-        <h1>Gold Box</h1>
-        <p>Blog de informações e novidades</p>
+
+    <header class="cabecalho">
+        <h1>GOLD BOX</h1>
+        <p>Informação, saúde e desempenho.</p>
+
+        <nav class="menu">
+            <a href="/">Início</a>
+            <a href="{% url 'blog:post_list' %}">Blog</a>
+            <a href="/contato/">Contato</a>
+            <a href="{% url 'login' %}">Entrar</a>
+        </nav>
     </header>
 
+    <section class="apresentacao">
+        <h2>Blog</h2>
+        <p>Dicas, novidades e informações para o seu rendimento e bem-estar.</p>
+    </section>
+
     <main>
-        <h2>Publicações</h2>
+        <h2>Últimas publicações</h2>
 
-        {% for publicacao in publicacoes %}
-            <article>
-                <h3>
-                    <a href="{% url 'blog:post_detail' publicacao.pk %}">
-                        {{ publicacao.titulo }}
-                    </a>
-                </h3>
-
-                <p>{{ publicacao.resumo }}</p>
-                <small>Autor: {{ publicacao.autor }}</small>
-            </article>
-            <hr>
-        {% empty %}
-            <p>Nenhuma publicação disponível no momento.</p>
-        {% endfor %}
-
-        {% if user.is_authenticated %}
-            <a href="{% url 'blog:post_create' %}">
-                Criar publicação
+        {% if user.is_staff %}
+            <a class="criar-publicacao"
+               href="{% url 'blog:post_create' %}">
+                + Nova publicação
             </a>
         {% endif %}
+
+        <div class="lista-publicacoes">
+            {% for publicacao in publicacoes %}
+                <article class="publicacao">
+                    <h3>
+                        <a href="{% url 'blog:post_detail' publicacao.pk %}">
+                            {{ publicacao.titulo }}
+                        </a>
+                    </h3>
+
+                    <p>{{ publicacao.resumo }}</p>
+
+                    <small>
+                        Autor: {{ publicacao.autor }} |
+                        {{ publicacao.data_criacao|date:"d/m/Y" }}
+                    </small>
+                </article>
+            {% empty %}
+                <p class="sem-publicacoes">
+                    Nenhuma publicação disponível no momento.
+                    Em breve, teremos novidades sobre suplementos,
+                    saúde e desempenho.
+                </p>
+            {% endfor %}
+        </div>
     </main>
+
+    <footer class="rodape">
+        © 2026 Gold Box — Todos os direitos reservados.
+    </footer>
+
 </body>
 </html>

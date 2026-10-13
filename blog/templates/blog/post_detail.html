@@ -1,78 +1,51 @@
-
+{% load static %}
 <!DOCTYPE html>
 <html lang="pt-br">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+    <link rel="stylesheet" href="{% static 'blog/css/blog.css' %}">
     <title>{{ publicacao.titulo }} | Gold Box</title>
 </head>
-
 <body>
 
     <header>
         <h1>Gold Box</h1>
-        <p>Blog</p>
+        <p>Blog de informações e novidades</p>
     </header>
 
     <main>
-
         <article>
+            <h1>{{ publicacao.titulo }}</h1>
 
-            <h2>{{ publicacao.titulo }}</h2>
-
-            <p>
-                <strong>Resumo:</strong>
-                {{ publicacao.resumo }}
-            </p>
+            <p>{{ publicacao.resumo }}</p>
 
             <p>
-                <strong>Autor:</strong>
-                {{ publicacao.autor }}
+                Publicado por {{ publicacao.autor }}
+                em {{ publicacao.data_criacao|date:"d/m/Y H:i" }}
             </p>
 
-            <p>
-                <strong>Data:</strong>
-                {{ publicacao.data_criacao|date:"d/m/Y H:i" }}
-            </p>
-
-            <hr>
-
-            <section>
-                <h3>Conteúdo</h3>
-
-                <div>
-                    {{ publicacao.conteudo|linebreaks }}
-                </div>
-            </section>
-
-            <hr>
-
-            <nav>
-
-                <a href="{% url 'blog:post_list' %}">
-                    Voltar para o blog
-                </a>
-
-                {% if user.is_staff %}
-
-                    <a href="{% url 'blog:post_update' publicacao.pk %}">
-                        Editar publicação
-                    </a>
-
-                    <a href="{% url 'blog:post_delete' publicacao.pk %}">
-                        Excluir publicação
-                    </a>
-
-                {% endif %}
-
-            </nav>
-
+            <div>
+                {{ publicacao.conteudo|linebreaks }}
+            </div>
         </article>
 
+        <nav>
+            <a href="{% url 'blog:post_list' %}">
+                Voltar para o blog
+            </a>
+
+            {% if user.is_staff %}
+                <a href="{% url 'blog:post_update' publicacao.pk %}">
+                    Editar publicação
+                </a>
+
+                <a href="{% url 'blog:post_delete' publicacao.pk %}">
+                    Excluir publicação
+                </a>
+            {% endif %}
+        </nav>
     </main>
 
 </body>
-
 </html>

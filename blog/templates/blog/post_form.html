@@ -1,26 +1,23 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="pt-br">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+    <link rel="stylesheet" href="{% static 'blog/css/blog.css' %}">
     <title>{{ titulo_pagina }} | Gold Box</title>
 </head>
-
 <body>
 
     <header>
         <h1>Gold Box</h1>
-        <p>Blog</p>
+        <p>Blog de informações e novidades</p>
     </header>
 
     <main>
-
         <h2>{{ titulo_pagina }}</h2>
 
         <form method="post">
-
             {% csrf_token %}
 
             {{ form.as_p }}
@@ -28,15 +25,14 @@
             <button type="submit">
                 Salvar publicação
             </button>
-
-            <a href="{% url 'blog:post_list' %}">
-                Cancelar
-            </a>
-
         </form>
 
+        <p>
+            <a href="{% url 'blog:post_list' %}">
+                Cancelar e voltar ao blog
+            </a>
+        </p>
     </main>
 
 </body>
-
 </html>
