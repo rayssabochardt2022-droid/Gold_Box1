@@ -1,0 +1,45 @@
+
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Excluir Dica | Gold Box</title>
+</head>
+
+<body>
+
+    <h1>Excluir dica</h1>
+
+    <p>Tem certeza de que deseja excluir esta dica?</p>
+
+    <h2>{{ dica.titulo }}</h2>
+
+    <p>{{ dica.conteudo }}</p>
+
+    <p>
+        <strong>Categoria:</strong>
+        {{ dica.categoria }}
+    </p>
+
+    <form method="post">
+
+        {% csrf_token %}
+
+        <button type="submit">
+            Sim, excluir
+        </button>
+
+    </form>
+
+    <br>
+
+    <a href="{% url 'lista_dicas' %}">
+        Cancelar e voltar para dicas
+    </a>
+
+</body>
+
+</html>

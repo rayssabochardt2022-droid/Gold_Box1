@@ -41,3 +41,12 @@ def editar_dica(request, pk):
         return redirect('lista_dicas')
 
     return render(request, 'dicas/editar.html', {'dica': dica})
+
+def excluir_dica(request, pk):
+    dica = get_object_or_404(Dica, pk=pk)
+
+    if request.method == 'POST':
+        dica.delete()
+        return redirect('lista_dicas')
+
+    return render(request, 'dicas/excluir.html', {'dica': dica})

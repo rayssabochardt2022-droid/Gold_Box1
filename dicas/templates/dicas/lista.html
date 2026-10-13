@@ -28,9 +28,17 @@
 
                     <h2>{{ dica.titulo }}</h2>
 
-                    <a href="{% url 'editar_dica' dica.pk %}">
-                        Editar
-                    </a>
+                    <div style="display: flex; flex-direction: column; gap: 8px;">
+
+                <a href="{% url 'editar_dica' dica.pk %}">
+                Editar
+                </a>
+
+                 <a href="{% url 'excluir_dica' dica.pk %}">
+                 Excluir
+                </a>
+
+                </div>
 
                 </div>
 
