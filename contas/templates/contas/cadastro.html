@@ -1,0 +1,105 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IronBox - Criar conta</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="{% static 'css/layout.css' %}">
+    <style>
+        .form-container input[type="password"] {
+            width: 100%;
+            padding: 14px 16px;
+            border: 1px solid #dcdcdc;
+            border-radius: 14px;
+            font-size: 0.98rem;
+            outline: none;
+        }
+        .form-container .erro { color: #c00; font-size: 0.85rem; margin-top: 4px; }
+        .form-container .ajuda { font-size: 0.8rem; color: #555; margin-top: 4px; }
+        .form-container .ajuda ul { padding-left: 18px; }
+        .form-container .link-extra { margin-top: 16px; text-align: center; }
+    </style>
+</head>
+
+<body class="contact-page">
+
+<main class="pg-container">
+
+    <nav class="menu">
+        <div class="logo">
+            <p>Iron<span>Box</span></p>
+        </div>
+
+        <ul>
+            <li>
+                <a href="{% url 'home' %}">
+                    <i class="bi bi-house-heart-fill"></i>
+                    <span>Home</span>
+                </a>
+            </li>
+
+            <li>
+                <a href="{% url 'home' %}#sobre">
+                    <i class="bi bi-clipboard-heart-fill"></i>
+                    <span>Sobre</span>
+                </a>
+            </li>
+
+            <li>
+                <a href="{% url 'login' %}">
+                    <i class="bi bi-arrow-through-heart-fill"></i>
+                    <span>Entrar</span>
+                </a>
+            </li>
+
+            <li>
+                <a href="{% url 'contato' %}">
+                    <i class="bi bi-person-heart"></i>
+                    <span>Contato</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+
+    <div class="conteudo">
+
+        <section class="sessao form-section">
+
+            <h2>Criar conta</h2>
+            <p>Cadastre-se para acessar a IronBox.</p>
+
+            <div class="form-container">
+
+                <form method="post">
+                    {% csrf_token %}
+
+                    {% for erro in form.non_field_errors %}
+                        <div class="erro">{{ erro }}</div>
+                    {% endfor %}
+
+                    {% for campo in form %}
+                        <div>
+                            <label for="{{ campo.id_for_label }}">{{ campo.label }}</label>
+                            {{ campo }}
+                            {% if campo.help_text %}<div class="ajuda">{{ campo.help_text|safe }}</div>{% endif %}
+                            {% for erro in campo.errors %}<div class="erro">{{ erro }}</div>{% endfor %}
+                        </div>
+                    {% endfor %}
+
+                    <input type="submit" value="Cadastrar">
+                </form>
+
+                <p class="link-extra">Já tem conta? <a href="{% url 'login' %}">Entrar</a></p>
+
+            </div>
+
+        </section>
+
+    </div>
+
+</main>
+
+</body>
+</html>
