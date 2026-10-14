@@ -1,9 +1,7 @@
-from django.shortcuts import render
-
-# Create your views here.
 
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Dica
+from .forms import DicaForm
 
 
 def lista_dicas(request):
@@ -13,34 +11,34 @@ def lista_dicas(request):
 
 def cadastrar_dica(request):
     if request.method == 'POST':
-        titulo = request.POST.get('titulo')
-        conteudo = request.POST.get('conteudo')
-        categoria = request.POST.get('categoria')
+        form = DicaForm(request.POST)
 
-        Dica.objects.create(
-            titulo=titulo,
-            conteudo=conteudo,
-            categoria=categoria
-        )
+        if form.is_valid():
+            form.save()
+            return redirect('lista_dicas')
+    else:
+        form = DicaForm()
 
-        return redirect('lista_dicas')
-
-    return render(request, 'dicas/cadastrar.html')
+    return render(request, 'dicas/cadastrar.html', {'form': form})
 
 
 def editar_dica(request, pk):
     dica = get_object_or_404(Dica, pk=pk)
 
     if request.method == 'POST':
-        dica.titulo = request.POST.get('titulo')
-        dica.conteudo = request.POST.get('conteudo')
-        dica.categoria = request.POST.get('categoria')
+        form = DicaForm(request.POST, instance=dica)
 
-        dica.save()
+        if form.is_valid():
+            form.save()
+            return redirect('lista_dicas')
+    else:
+        form = DicaForm(instance=dica)
 
-        return redirect('lista_dicas')
+    return render(request, 'dicas/editar.html', {
+        'dica': dica,
+        'form': form
+    })
 
-    return render(request, 'dicas/editar.html', {'dica': dica})
 
 def excluir_dica(request, pk):
     dica = get_object_or_404(Dica, pk=pk)

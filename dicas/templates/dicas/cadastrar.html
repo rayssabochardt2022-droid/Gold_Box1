@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -15,20 +16,31 @@
 
         {% csrf_token %}
 
-        <label for="titulo">Título:</label>
-        <input type="text" id="titulo" name="titulo" required>
+        {{ form.non_field_errors }}
 
-        <br><br>
+        <div>
+            <label for="{{ form.titulo.id_for_label }}">Título:</label>
+            {{ form.titulo }}
+            {{ form.titulo.errors }}
+        </div>
 
-        <label for="conteudo">Conteúdo:</label>
-        <textarea id="conteudo" name="conteudo" required></textarea>
+        <br>
 
-        <br><br>
+        <div>
+            <label for="{{ form.conteudo.id_for_label }}">Conteúdo:</label>
+            {{ form.conteudo }}
+            {{ form.conteudo.errors }}
+        </div>
 
-        <label for="categoria">Categoria:</label>
-        <input type="text" id="categoria" name="categoria" required>
+        <br>
 
-        <br><br>
+        <div>
+            <label for="{{ form.categoria.id_for_label }}">Categoria:</label>
+            {{ form.categoria }}
+            {{ form.categoria.errors }}
+        </div>
+
+        <br>
 
         <button type="submit">Cadastrar dica</button>
 
