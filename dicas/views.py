@@ -1,14 +1,17 @@
-
+from django.contrib.auth.decorators import login_required, user_passes_test
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Dica
 from .forms import DicaForm
 
+def usuario_superuser(user):
+    return user.is_authenticated and user.is_superuser
 
 def lista_dicas(request):
     dicas = Dica.objects.all()
     return render(request, 'dicas/lista.html', {'dicas': dicas})
 
-
+@login_required(login_url='login')
+@user_passes_test(usuario_superuser)
 def cadastrar_dica(request):
     if request.method == 'POST':
         form = DicaForm(request.POST)
@@ -21,7 +24,8 @@ def cadastrar_dica(request):
 
     return render(request, 'dicas/cadastrar.html', {'form': form})
 
-
+@login_required(login_url='login')
+@user_passes_test(usuario_superuser)
 def editar_dica(request, pk):
     dica = get_object_or_404(Dica, pk=pk)
 
@@ -39,7 +43,8 @@ def editar_dica(request, pk):
         'form': form
     })
 
-
+@login_required(login_url='login')
+@user_passes_test(usuario_superuser)
 def excluir_dica(request, pk):
     dica = get_object_or_404(Dica, pk=pk)
 
