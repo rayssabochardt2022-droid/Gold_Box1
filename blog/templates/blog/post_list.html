@@ -40,6 +40,15 @@
         <div class="lista-publicacoes">
             {% for publicacao in publicacoes %}
                 <article class="publicacao">
+
+                    {% if publicacao.imagem %}
+                        <img
+                            src="{{ publicacao.imagem.url }}"
+                            alt="{{ publicacao.titulo }}"
+                            class="imagem-publicacao"
+                        >
+                    {% endif %}
+
                     <h3>
                         <a href="{% url 'blog:post_detail' publicacao.pk %}">
                             {{ publicacao.titulo }}
@@ -52,6 +61,7 @@
                         Autor: {{ publicacao.autor }} |
                         {{ publicacao.data_criacao|date:"d/m/Y" }}
                     </small>
+
                 </article>
             {% empty %}
                 <p class="sem-publicacoes">

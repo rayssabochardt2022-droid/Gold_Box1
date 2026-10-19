@@ -66,6 +66,7 @@ body {
 
 /* Área principal */
 main {
+    width: 100%;
     max-width: 1200px;
     min-height: 380px;
     margin: 0 auto;
@@ -92,22 +93,29 @@ main > h2 {
     background-color: #087f4d;
 }
 
-/* Cartões das publicações */
+/* Grade das publicações */
 .lista-publicacoes {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 20px;
+    align-items: start;
+    width: 100%;
 }
 
+/* Cartões das publicações */
 .publicacao {
+    width: 100%;
+    min-width: 0;
+    overflow: hidden;
     background-color: #0b141b;
     border: 1px solid #283943;
-    border-radius: 6px;
+    border-radius: 8px;
     padding: 20px;
 }
 
 .publicacao h3 {
     margin-bottom: 12px;
+    overflow-wrap: anywhere;
 }
 
 .publicacao h3 a {
@@ -122,10 +130,30 @@ main > h2 {
 .publicacao p {
     color: #b8c5ce;
     margin-bottom: 12px;
+    overflow-wrap: anywhere;
 }
 
 .publicacao small {
     color: #91a2ad;
+    overflow-wrap: anywhere;
+}
+
+/* Imagens dos cartões de publicação */
+.lista-publicacoes .publicacao .imagem-publicacao {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    height: 180px;
+    object-fit: contain;
+    margin: 0 0 15px;
+    border-radius: 8px;
+    background-color: #ffffff;
+}
+
+/* Conteúdo completo da publicação */
+.conteudo-publicacao {
+    margin-top: 20px;
+    overflow-wrap: anywhere;
 }
 
 /* Mensagem quando não existem publicações */
@@ -144,13 +172,14 @@ main > h2 {
     padding: 20px;
 }
 
-/* Ajuste para celulares e tablets */
+/* Ajustes para tablets */
 @media (max-width: 800px) {
     .lista-publicacoes {
         grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 }
 
+/* Ajustes para celulares */
 @media (max-width: 550px) {
     .lista-publicacoes {
         grid-template-columns: 1fr;
@@ -164,4 +193,14 @@ main > h2 {
     main {
         padding: 25px 15px;
     }
+
+    .lista-publicacoes .publicacao .imagem-publicacao {
+        height: 160px;
+    }
+}
+.lista-publicacoes .publicacao img {
+    width: 100% !important;
+    height: 180px !important;
+    max-width: 100% !important;
+    object-fit: contain !important;
 }

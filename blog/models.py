@@ -1,4 +1,3 @@
-
 from django.db import models
 from django.contrib.auth.models import User
 
@@ -7,6 +6,12 @@ class Publicacao(models.Model):
     titulo = models.CharField(max_length=200)
     resumo = models.CharField(max_length=300)
     conteudo = models.TextField()
+
+    imagem = models.ImageField(
+        upload_to='blog/',
+        blank=True,
+        null=True
+    )
 
     autor = models.ForeignKey(
         User,
@@ -24,11 +29,3 @@ class Publicacao(models.Model):
 
     def __str__(self):
         return self.titulo
-
-
-
-
-
-
-
-

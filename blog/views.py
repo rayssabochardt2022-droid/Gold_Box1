@@ -1,5 +1,4 @@
 
-
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required, user_passes_test
 
@@ -41,12 +40,16 @@ def post_detail(request, pk):
 @user_passes_test(pode_gerenciar_blog)
 def post_create(request):
     if request.method == 'POST':
-        form = PublicacaoForm(request.POST)
+        form = PublicacaoForm(
+            request.POST,
+            request.FILES
+        )
 
         if form.is_valid():
             publicacao = form.save(commit=False)
             publicacao.autor = request.user
             publicacao.save()
+
             return redirect('blog:post_list')
     else:
         form = PublicacaoForm()
@@ -60,22 +63,29 @@ def post_create(request):
 @login_required
 @user_passes_test(pode_gerenciar_blog)
 def post_update(request, pk):
-    publicacao = get_object_or_404(Publicacao, pk=pk)
+    publicacao = get_object_or_404(
+        Publicacao,
+        pk=pk
+    )
 
     if request.method == 'POST':
         form = PublicacaoForm(
             request.POST,
+            request.FILES,
             instance=publicacao
         )
 
         if form.is_valid():
             form.save()
+
             return redirect(
                 'blog:post_detail',
                 pk=publicacao.pk
             )
     else:
-        form = PublicacaoForm(instance=publicacao)
+        form = PublicacaoForm(
+            instance=publicacao
+        )
 
     return render(request, 'blog/post_form.html', {
         'form': form,
@@ -86,7 +96,10 @@ def post_update(request, pk):
 @login_required
 @user_passes_test(pode_gerenciar_blog)
 def post_delete(request, pk):
-    publicacao = get_object_or_404(Publicacao, pk=pk)
+    publicacao = get_object_or_404(
+        Publicacao,
+        pk=pk
+    )
 
     if request.method == 'POST':
         publicacao.delete()

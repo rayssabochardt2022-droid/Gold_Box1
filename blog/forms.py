@@ -1,5 +1,4 @@
 
-
 from django import forms
 from .models import Publicacao
 
@@ -7,10 +6,12 @@ from .models import Publicacao
 class PublicacaoForm(forms.ModelForm):
     class Meta:
         model = Publicacao
+
         fields = [
             'titulo',
             'resumo',
             'conteudo',
+            'imagem',
             'publicado',
         ]
 
@@ -27,6 +28,9 @@ class PublicacaoForm(forms.ModelForm):
                 'class': 'form-control',
                 'rows': 8,
                 'placeholder': 'Escreva o conteúdo aqui',
+            }),
+            'imagem': forms.ClearableFileInput(attrs={
+                'class': 'form-control',
             }),
             'publicado': forms.CheckboxInput(attrs={
                 'class': 'form-check-input',
