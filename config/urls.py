@@ -28,6 +28,7 @@ urlpatterns = [
 path('login/', auth_views.LoginView.as_view( template_name='principal/login.html'), name='login'),
     path('produtos/', include('produtos.urls')),
 
+
 ]
 urlpatterns += static(
     settings.MEDIA_URL,

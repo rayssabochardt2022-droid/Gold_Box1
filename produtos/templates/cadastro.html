@@ -1,4 +1,3 @@
-
 {% load static %}
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -9,14 +8,14 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="{% static 'css/layout.css' %}">
-    <link rel="stylesheet" href="{% static 'css/produtos.css' %}">
+    <link rel="stylesheet" href="{% static 'css/cadastro.css' %}">
 
 </head>
 
 <body>
 <main class="pg-container">
     <section class="form-produto">
-        <h1>Cadastrar novo produto</h1>
+        <h1>Cadastrar novo Produto</h1>
 
         {% if erro %}
             <div class="erro">{{ erro }}</div>
@@ -26,7 +25,7 @@
             {% csrf_token %}
 
             <div class="campo">
-                <label for="nome">Nome do produto <span class="obrigatorio">*</span></label>
+                <label for="nome">Nome do Produto <span class="obrigatorio">*</span></label>
                 <input type="text" id="nome" name="nome"
                        maxlength="150" required
                        value="{{ dados.nome|default:'' }}"

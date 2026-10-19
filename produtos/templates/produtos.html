@@ -55,14 +55,14 @@ function alternarDescricao(botao) {
 
         <section class="sessao">
 
-            <h2>Produtos disponíveis</h2>
+<div class="cadastrar">
+            <a href="{% url 'cadastro' %}" class="btn-cadastrar">Novo Produto</a>
 
-            <div class="cadastrar">
-            <a href="{% url 'cadastro' %}" class="btn-cadastrar">+ Novo Produto</a>
+                <a href="{% url 'editar_produto' %}" class="btn-cadastrar">Editar Produto</a>
+
                 </div>
 
-
-
+            <h2>Produtos disponíveis</h2>
 
 <div class="produtos">
 

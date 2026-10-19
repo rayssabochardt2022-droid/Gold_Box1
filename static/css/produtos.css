@@ -1,4 +1,3 @@
-
 .produtos {
     display: grid;
     grid-template-columns: repeat(5, minmax(0, 1fr));
@@ -32,7 +31,6 @@
     box-shadow: 0 12px 25px rgba(0, 0, 0, 0.18);
 }
 
-/* Faixa escura no topo do card */
 .produto::before {
     content: "";
     display: block;
@@ -44,7 +42,6 @@
     order: 1;
 }
 
-/* Imagem do produto */
 .produto img {
     order: 0;
     width: 100%;
@@ -53,7 +50,7 @@
     margin-bottom: 10px;
 }
 
-/* Nome */
+
 .produto h3 {
     order: 2;
     font-size: 17px;
@@ -63,7 +60,6 @@
     overflow-wrap: anywhere;
 }
 
-/* Preço */
 .produto strong {
     order: 3;
     font-size: 19px;
@@ -71,7 +67,6 @@
     margin-bottom: 10px;
 }
 
-/* Descrição recolhida */
 .descricao-container {
     order: 4;
     width: 100%;
@@ -92,13 +87,12 @@
     overflow: hidden;
 }
 
-/* Descrição expandida */
+
 .produto-descricao.expandida {
     display: block;
     overflow: visible;
 }
 
-/* Botão Ler mais / Ler menos */
 .btn-ler-mais {
     display: inline-block;
     margin-top: 5px;
@@ -116,7 +110,7 @@
     text-decoration: underline;
 }
 
-/* Estoque */
+
 .produto-estoque {
     order: 5;
     margin: 0 0 12px;
@@ -124,15 +118,6 @@
     overflow-wrap: anywhere;
 }
 
-.estoque-disponivel {
-    color: #238636;
-}
-
-.estoque-esgotado {
-    color: #d93025;
-}
-
-/* Botão Comprar */
 .produto button {
     order: 6;
     width: 100%;
@@ -260,4 +245,6 @@
 .produto p{
 order: 3;
 }
+
+
 
