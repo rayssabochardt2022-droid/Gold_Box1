@@ -1,3 +1,4 @@
+
 .produtos {
     display: grid;
     grid-template-columns: repeat(5, minmax(0, 1fr));
@@ -5,66 +6,145 @@
     width: 100%;
     max-width: none;
     margin: 0 auto;
-    padding: 30px 15px;
+    padding: 25px 15px;
+    box-sizing: border-box;
     align-items: stretch;
 }
 
-
 .produto {
+    position: relative;
+    overflow: hidden;
+    min-width: 0;
+    padding: 14px;
     background-color: var(--cor-clara);
+    border: 1px solid rgba(188, 98, 240, 0.25);
     border-radius: var(--bordas-arredondas);
-    padding: 20px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.12);
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: stretch;
     text-align: center;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.12);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    border: 1px solid rgba(188, 98, 240, 0.25);
 }
 
-
 .produto:hover {
-    transform: translateY(-8px);
+    transform: translateY(-4px);
     box-shadow: 0 12px 25px rgba(0, 0, 0, 0.18);
 }
 
+/* Faixa escura no topo do card */
+.produto::before {
+    content: "";
+    display: block;
+    flex-shrink: 0;
+    width: calc(100% + 28px);
+    height: 18px;
+    margin: -14px -14px 12px;
+    background-color: var(--bg-cor-escura);
+    order: 1;
+}
 
+/* Imagem do produto */
 .produto img {
-    order:0;
+    order: 0;
     width: 100%;
-    height: 200px;
+    height: 145px;
     object-fit: contain;
-    margin-bottom: 15px;
-}
-
-.produto h3 {
-    order:2;
-    font-size: 20px;
     margin-bottom: 10px;
+}
+
+/* Nome */
+.produto h3 {
+    order: 2;
+    font-size: 17px;
+    line-height: 1.35;
+    margin: 0 0 8px;
     color: var(--cor-texto-escuro);
+    overflow-wrap: anywhere;
 }
 
-
+/* Preço */
 .produto strong {
-    order:3;
-    font-size: 21px;
+    order: 3;
+    font-size: 19px;
     color: #7b20b5;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
 }
 
+/* Descrição recolhida */
+.descricao-container {
+    order: 4;
+    width: 100%;
+    margin-bottom: 10px;
+    text-align: left;
+}
 
+.produto-descricao {
+    margin: 0;
+    color: #555;
+    font-size: 12px;
+    line-height: 1.5;
+    overflow-wrap: anywhere;
+
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* Descrição expandida */
+.produto-descricao.expandida {
+    display: block;
+    overflow: visible;
+}
+
+/* Botão Ler mais / Ler menos */
+.btn-ler-mais {
+    display: inline-block;
+    margin-top: 5px;
+    padding: 0;
+    border: none;
+    background: transparent;
+    color: #8c32c5;
+    font-size: 12px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.btn-ler-mais:hover {
+    color: #9703d1;
+    text-decoration: underline;
+}
+
+/* Estoque */
+.produto-estoque {
+    order: 5;
+    margin: 0 0 12px;
+    font-size: 12px;
+    overflow-wrap: anywhere;
+}
+
+.estoque-disponivel {
+    color: #238636;
+}
+
+.estoque-esgotado {
+    color: #d93025;
+}
+
+/* Botão Comprar */
 .produto button {
-    order:4;
+    order: 6;
     width: 100%;
     max-width: 220px;
-    padding: 12px 20px;
+    margin: auto auto 0;
+    padding: 10px 12px;
     border: none;
     border-radius: 8px;
     background-color: var(--bg-cor-escura);
     color: #fff;
     font-family: inherit;
-    font-size: 16px;
+    font-size: 14px;
     font-weight: bold;
     cursor: pointer;
     transition: background-color 0.3s ease, transform 0.3s ease;
@@ -72,51 +152,112 @@
 
 .produto button:hover {
     background-color: #8c32c5;
+    transform: scale(1.02);
+}
+
+/* Botão Cadastrar */
+.btn-cadastrar {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin: 15px;
+    width: 100%;
+    max-width: 200px;
+    padding: 12px 16px;
+    box-sizing: border-box;
+    border: none;
+    border-radius: 8px;
+    background-color: #000;
+    color: var(--cor-clara);
+    font-family: var(--fonte-padrao);
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.btn-cadastrar:hover {
+    background-color: #8c32c5;
     transform: scale(1.03);
 }
 
-
-@media (max-width: 900px) {
-    .produtos {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 20px;
-    }
-}
-
-
-@media (max-width: 600px) {
-    .produtos {
-        grid-template-columns: 1fr;
-        padding: 20px 10px;
-    }
-
-    .produto img {
-        height: 180px;
-    }
-}
+/* Título da página */
 .pagina-produtos .page-title {
     background-image: none;
     background-color: #eac6ff;
     color: #000;
 }
 
-.produto {
-    position: relative;
-    overflow: hidden;
-}
-
-.produto::before {
-    content: "";
-    display: block;
-    width: calc(100% + 40px);
-    height: 22px;
-    background-color:var(--bg-cor-escura);
-    margin: 0 -20px 15px;
-    flex-shrink: 0;
-    order: 1;
-}
-
 .sessao h2 {
     font-size: 30px;
-    display: flex;
 }
+
+/* Telas médias */
+@media (max-width: 1100px) {
+    .produtos {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 750px) {
+    .produtos {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+        padding: 20px 10px;
+    }
+
+    .produto {
+        padding: 10px;
+    }
+
+    .produto::before {
+        width: calc(100% + 20px);
+        margin: -10px -10px 10px;
+    }
+
+    .produto img {
+        height: 125px;
+    }
+
+    .produto h3 {
+        font-size: 15px;
+    }
+
+    .produto strong {
+        font-size: 17px;
+    }
+}
+
+@media (max-width: 360px) {
+    .produtos {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+.produto .btn-ler-mais {
+    width: auto;
+    max-width: fit-content;
+    padding: 3px 8px;
+    margin-top: 4px;
+    font-size: 11px;
+    background: transparent;
+    color: #8c32c5;
+    border: none;
+    border-radius: 4px;
+    align-self: flex-start;
+    transform: none;
+}
+
+.produto .btn-ler-mais:hover {
+    background: transparent;
+    color: #9703d1;
+    text-decoration: underline;
+    transform: none;
+}
+
+.produto p{
+order: 3;
+}
+

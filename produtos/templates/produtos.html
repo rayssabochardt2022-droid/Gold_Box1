@@ -16,6 +16,16 @@
     <link rel="stylesheet" href="{% static 'css/produtos.css' %}">
 </head>
 
+<script>
+function alternarDescricao(botao) {
+    const container = botao.closest('.descricao-container');
+    const descricao = container.querySelector('.produto-descricao');
+    const expandida = descricao.classList.toggle('expandida');
+
+    botao.textContent = expandida ? 'Ler menos' : 'Ler mais';
+    botao.setAttribute('aria-expanded', expandida);
+}
+</script>
 <body class="pagina-produtos">
 
 <main class="pg-container">
@@ -27,40 +37,9 @@
         </div>
 
         <ul>
-            <li>
-                <a href="{% url 'home' %}">
-                    <i class="bi bi-house-heart-fill"></i>
-                    <span>Home</span>
-                </a>
-            </li>
-
-            <li>
-                <a href='#sobre'">
-                    <i class="bi bi-heart-fill"></i>
-                    <span>Sobre nós</span>
-                </a>
-            </li>
-
-            <li>
-                <a href="{% url 'login' %}">
-                    <i class="bi bi-arrow-through-heart-fill"></i>
-                    <span>Entrar</span>
-                </a>
-            </li>
-
-            <li>
-                <a href="{% url 'contato' %}">
-                    <i class="bi bi-person-heart"></i>
-                    <span>Contato</span>
-                </a>
-            </li>
-
-            <li>
-                <a href="{% url 'produtos' %}">
-                    <i class="bi bi-bag-heart-fill"></i>
-                    <span>Produtos</span>
-                </a>
-            </li>
+            <li><a href="{% url 'home' %}"><i class="bi bi-house-heart-fill"></i><span>Home</span></a></li>
+            <li><a href="{% url 'login' %}"><i class="bi bi-arrow-through-heart-fill"></i><span>Entrar</span></a></li>
+            <li><a href="{% url 'contato' %}"><i class="bi bi-person-heart"></i><span>Contato</span></a></li>
         </ul>
 
     </nav>
@@ -68,149 +47,69 @@
 
     <div class="conteudo">
 
-
-
+{% if messages %}
+    {% for message in messages %}
+        <p class="mensagem-sucesso">{{ message }}</p>
+    {% endfor %}
+{% endif %}
 
         <section class="sessao">
 
             <h2>Produtos disponíveis</h2>
 
-            <div class="produtos">
-
-                <div class="produto">
-                    <img src="{% static 'img/produtos/whey_max.webp' %}" alt="Whey Protein">
-
-                    <h3>Whey Protein 100% 900g</h3>
-
-                    <strong>R$ 129,90</strong>
-
-                    <button>Comprar</button>
+            <div class="cadastrar">
+            <a href="{% url 'cadastro' %}" class="btn-cadastrar">+ Novo Produto</a>
                 </div>
 
 
-                <div class="produto">
-                    <img src="{% static 'img/produtos/creatina_max.png' %}" alt="Creatina">
-
-                    <h3>Creatina Monohidratada 300g</h3>
-
-                    <strong>R$ 89,90</strong>
-
-                    <button>Comprar</button>
-                </div>
 
 
-                <div class="produto">
-                    <img src="{% static 'img/produtos/pretreino_panic (3).webp' %}" alt="Pré-treino">
+<div class="produtos">
 
-                    <h3>Pré-treino 300g</h3>
+    {% for produto in produtos %}
+        <div class="produto">
 
-                    <strong>R$ 99,90</strong>
+            {% if produto.imagem %}
+                <img src="{{ produto.imagem.url }}"
+                     alt="{{ produto.nome }}">
+            {% else %}
+                <div class="sem-imagem">Sem imagem</div>
+            {% endif %}
 
-                    <button>Comprar</button>
-                </div>
+            <h3>{{ produto.nome }}</h3>
 
-                <div class="produto">
-                    <img src="{% static 'img/produtos/whey_dux.webp' %}" alt="Whey Protein">
+            <p>{{ produto.marca }}</p>
 
-                    <h3>Whey Protein Concentrado 900g</h3>
+            <strong>R$ {{ produto.preco|floatformat:2 }}</strong>
 
-                    <strong>R$ 99,90</strong>
-
-                    <button>Comprar</button>
-                </div>
-
-                <div class="produto">
-                    <img src="{% static 'img/produtos/pretreino_panic (3).webp' %}" alt="Pré-treino">
-
-                    <h3>Pré-treino 300g</h3>
-
-                    <strong>R$ 99,90</strong>
-
-                    <button>Comprar</button>
-                </div>
-
-                <div class="produto">
-                    <img src="{% static 'img/produtos/pretreino_panic (3).webp' %}" alt="Pré-treino">
-
-                    <h3>Pré-treino 300g</h3>
-
-                    <strong>R$ 99,90</strong>
-
-                    <button>Comprar</button>
-                </div>
-
-                <div class="produto">
-                    <img src="{% static 'img/produtos/pretreino_panic (3).webp' %}" alt="Pré-treino">
-
-                    <h3>Pré-treino 300g</h3>
-
-                    <strong>R$ 99,90</strong>
-
-                    <button>Comprar</button>
-                </div>
-
-                <div class="produto">
-                    <img src="{% static 'img/produtos/pretreino_panic (3).webp' %}" alt="Pré-treino">
-
-                    <h3>Pré-treino 300g</h3>
-
-                    <strong>R$ 99,90</strong>
-
-                    <button>Comprar</button>
-                </div>
-
-                <div class="produto">
-                    <img src="{% static 'img/produtos/pretreino_panic (3).webp' %}" alt="Pré-treino">
-
-                    <h3>Pré-treino 300g</h3>
-
-                    <strong>R$ 99,90</strong>
-
-                    <button>Comprar</button>
-                </div>
-
-                <div class="produto">
-                    <img src="{% static 'img/produtos/pretreino_panic (3).webp' %}" alt="Pré-treino">
-
-                    <h3>Pré-treino 300g</h3>
-
-                    <strong>R$ 99,90</strong>
-
-                    <button>Comprar</button>
-                </div>
-
-                <div class="produto">
-                    <img src="{% static 'img/produtos/pretreino_panic (3).webp' %}" alt="Pré-treino">
-
-                    <h3>Pré-treino 300g</h3>
-
-                    <strong>R$ 99,90</strong>
-
-                    <button>Comprar</button>
-                </div>
-
-                <div class="produto">
-                    <img src="{% static 'img/produtos/pretreino_panic (3).webp' %}" alt="Pré-treino">
-
-                    <h3>Pré-treino 300g</h3>
-
-                    <strong>R$ 99,90</strong>
-
-                    <button>Comprar</button>
-                </div>
-
-                <div class="produto">
-                    <img src="{% static 'img/produtos/pretreino_panic (3).webp' %}" alt="Pré-treino">
-
-                    <h3>Pré-treino 300g</h3>
-
-                    <strong>R$ 99,90</strong>
-
-                    <button>Comprar</button>
-                </div>
+            <p>Estoque: {{ produto.estoque }}</p>
 
 
-            </div>
+    <div class="descricao-container">
+        <p class="produto-descricao">
+         {{ produto.descricao|default:"Sem descrição cadastrada" }}
+      </p>
+
+     {% if produto.descricao %}
+         <button type="button"
+                   class="btn-ler-mais"
+                    aria-expanded="false"
+                    onclick="alternarDescricao(this)">
+               Ler mais
+         </button>
+     {% endif %}
+    </div>
+
+
+            <button type="button">Comprar</button>
+
+        </div>
+    {% empty %}
+        <p>Nenhum produto cadastrado ainda.</p>
+    {% endfor %}
+
+</div>
+
 
         </section>
 

@@ -1,56 +1,99 @@
-{% extends 'principal/index.html' %}
 
-{% block title %} Cadastro Produtos {% endblock %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastrar Produto | Iron Box</title>
 
-{% block content %}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="{% static 'css/layout.css' %}">
+    <link rel="stylesheet" href="{% static 'css/produtos.css' %}">
 
-{% if messages %}
-    {% for message in messages %}
-        <div class="alert alert-{{ message.tags }}">
-            {{ message }}
-        </div>
-    {% endfor %}
-{% endif %}
+</head>
 
-<h2 class="mb-3">Cadastro Produtos</h2>
-<div class="table-responsive">
-    <table class="table">
-        <thead>
-        <tr>
-            <th>Nome</th>
-            <th>Preço</th>
-            <th>Imagem</th>
-        </tr>
-        </thead>
-        <tbody>
-        {% for produtoc in produtosc %}
-        <tr>
-            <td>{{ produtoc.nome }}</td>
-            <td>{{ produtoc.preco }}</td>
-            <td>{{ produtoc.imagem|default:"-" }}</td>
-            <td>
-                <a href="{% url 'produtos:produto_detalhe' pk=produtoc.pk %}" class="btn btn-info btn-sm"> <i class="bi bi-eye-fill"></i></a>
-                <a href="{% url 'produtos:produto_editar' pk=produtoc.pk %}" class="btn btn-info btn-sm"> <i class="bi bi-pencil-square"></i></a>
-                <form action="{% url 'produtos:produto_excluir' pk=produtoc.pk %}"
-                      method="POST"
-                      onsubmit="return confirm('Deseja realmente excluir o produto {{ produtoc.nome }}?')">
+<body>
+<main class="pg-container">
+    <section class="form-produto">
+        <h1>Cadastrar novo produto</h1>
 
-                    {% csrf_token %}
-                    <button type="submit" class="btn btn-danger btn-sm"><i class="bi bi-trash"></i></button>
-                </form>
-            </td>
-        </tr>
-        {% empty %}
-        <tr>
-            <td colspan="5" class="text-center">
-                nenhum produto cadastrado.
-            </td>
-        </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+        {% if erro %}
+            <div class="erro">{{ erro }}</div>
+        {% endif %}
 
-</div>
-<a href="{% url 'produtos:produto_novo' %}" class="btn btn-success mt-4">Novo Produto</a>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
 
-{% endblock%}
+            <div class="campo">
+                <label for="nome">Nome do produto <span class="obrigatorio">*</span></label>
+                <input type="text" id="nome" name="nome"
+                       maxlength="150" required
+                       value="{{ dados.nome|default:'' }}"
+                       placeholder="Ex.: Whey Protein 900g">
+            </div>
+
+            <div class="campo">
+                <label for="categoria">Categoria <span class="obrigatorio">*</span></label>
+                <select id="categoria" name="categoria" required>
+                    <option value="">Selecione uma categoria</option>
+                    <option value="whey">Whey Protein</option>
+                    <option value="creatina">Creatina</option>
+                    <option value="pre_treino">Pré-treino</option>
+                    <option value="glutamina">Glutamina</option>
+                    <option value="hipercalorico">Hipercalórico</option>
+                    <option value="termogenico">Termogênico</option>
+                    <option value="outros">Outros</option>
+                </select>
+            </div>
+
+            <div class="campo">
+                <label for="marca">Marca <span class="obrigatorio">*</span></label>
+                <input type="text" id="marca" name="marca"
+                       maxlength="100" required
+                       value="{{ dados.marca|default:'' }}"
+                       placeholder="Ex.: Max Titanium">
+            </div>
+
+            <div class="campo">
+                <label for="preco">Preço (R$) <span class="obrigatorio">*</span></label>
+                <input type="number" id="preco" name="preco"
+                       min="0.01" step="0.01" required
+                       value="{{ dados.preco|default:'' }}"
+                       placeholder="Ex.: 129.90">
+            </div>
+
+            <div class="campo">
+                <label for="estoque">Quantidade em estoque <span class="obrigatorio">*</span></label>
+                <input type="number" id="estoque" name="estoque"
+                       min="0" step="1" required
+                       value="{{ dados.estoque|default:'' }}"
+                       placeholder="Ex.: 15">
+            </div>
+
+            <div class="campo">
+                <label for="descricao">Descrição</label>
+                <textarea id="descricao" name="descricao"
+                          placeholder="Detalhes do produto...">{{ dados.descricao|default:'' }}</textarea>
+            </div>
+
+            <div class="campo">
+                <label for="imagem">Imagem do produto</label>
+                <input type="file" id="imagem" name="imagem"
+                       accept="image/*">
+            </div>
+
+            <div class="botoes">
+                <button type="submit" class="botao principal">
+                    <i class="bi bi-plus-circle"></i> Salvar produto
+                </button>
+
+                <a href="{% url 'produtos' %}" class="botao secundario">
+                    Cancelar
+                </a>
+            </div>
+        </form>
+    </section>
+</main>
+</body>
+</html>
