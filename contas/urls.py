@@ -1,9 +1,10 @@
 from django.urls import path
 
-from .views import CadastroView, GoldBoxLoginView, GoldBoxLogoutView
+from .views import CadastroView, GoldBoxLoginView, GoldBoxLogoutView, PerfilView
 
 urlpatterns = [
     path('cadastro/', CadastroView.as_view(), name='cadastro'),
     path('login/', GoldBoxLoginView.as_view(), name='login'),
     path('logout/', GoldBoxLogoutView.as_view(), name='logout'),
+    path('perfil/', PerfilView.as_view(), name='perfil'),
 ]

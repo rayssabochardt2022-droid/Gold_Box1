@@ -1,8 +1,9 @@
 from django.contrib.auth import login
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import LoginView, LogoutView
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
-from django.views.generic import CreateView
+from django.views.generic import CreateView, TemplateView
 
 from .forms import CadastroForm
 
@@ -30,3 +31,6 @@ class GoldBoxLoginView(LoginView):
 
 class GoldBoxLogoutView(LogoutView):
     next_page = reverse_lazy('home')
+
+class PerfilView(LoginRequiredMixin, TemplateView):
+        template_name = "contas/perfil.html"
