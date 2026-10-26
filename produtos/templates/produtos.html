@@ -28,7 +28,37 @@ function alternarDescricao(botao) {
     botao.setAttribute('aria-expanded', expandida);
 }
 </script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const botoes = document.querySelectorAll(".filtro");
+    const produtos = document.querySelectorAll(".produto-card");
 
+    botoes.forEach(function (botao) {
+        botao.addEventListener("click", function () {
+            const categoriaSelecionada = this.dataset.categoria;
+
+            botoes.forEach(function (item) {
+                item.classList.remove("ativo");
+            });
+
+            this.classList.add("ativo");
+
+            produtos.forEach(function (produto) {
+                const categoriaProduto = produto.dataset.categoria;
+
+                if (
+                    categoriaSelecionada === "todos" ||
+                    categoriaProduto === categoriaSelecionada
+                ) {
+                    produto.classList.remove("oculto");
+                } else {
+                    produto.classList.add("oculto");
+                }
+            });
+        });
+    });
+});
+</script>
 <main class="pg-container">
 
     <nav class="menu">
@@ -43,6 +73,12 @@ function alternarDescricao(botao) {
         <a href="{% url 'home' %}">
             <i class="bi bi-house-heart-fill"></i>
             <span>Home</span>
+        </a>
+    </li>
+<li>
+        <a href="{% url 'contato' %}">
+            <i class="bi bi-person-heart"></i>
+            <span>Contato</span>
         </a>
     </li>
 
@@ -65,12 +101,6 @@ function alternarDescricao(botao) {
         </li>
     {% endif %}
 
-    <li>
-        <a href="{% url 'contato' %}">
-            <i class="bi bi-person-heart"></i>
-            <span>Contato</span>
-        </a>
-    </li>
 </ul>
 
 
@@ -88,6 +118,39 @@ function alternarDescricao(botao) {
 
             <h2>Produtos disponíveis</h2>
 
+<div class="filtros-categorias">
+    <button type="button" class="filtro ativo" data-categoria="todos">
+        Todos
+    </button>
+
+    <button type="button" class="filtro" data-categoria="whey">
+        Whey Protein
+    </button>
+
+    <button type="button" class="filtro" data-categoria="creatina">
+        Creatina
+    </button>
+
+    <button type="button" class="filtro" data-categoria="pre_treino">
+        Pré-treino
+    </button>
+
+    <button type="button" class="filtro" data-categoria="glutamina">
+        Glutamina
+    </button>
+
+    <button type="button" class="filtro" data-categoria="hipercalorico">
+        Hipercalórico
+    </button>
+
+    <button type="button" class="filtro" data-categoria="termogenico">
+        Termogênico
+    </button>
+
+    <button type="button" class="filtro" data-categoria="outros">
+        Outros
+    </button>
+</div>
             {% if user.is_authenticated and user.is_superuser %}
                 <div class="cadastrar">
                     <a href="{% url 'cadastro' %}" class="btn-cadastrar">
@@ -101,7 +164,7 @@ function alternarDescricao(botao) {
 
                 {% for produto in produtos %}
 
-                    <div class="produto">
+                    <div class="produto produto-card" data-categoria="{{ produto.categoria }}">
 
                         {% if produto.imagem %}
                             <img src="{{ produto.imagem.url }}"
@@ -133,9 +196,14 @@ function alternarDescricao(botao) {
                                         onclick="alternarDescricao(this)">
                                     Ler mais
                                 </button>
+
                             {% endif %}
 
+
                         </div>
+                    {% if not user.is_superuser %}
+                    <button type="button" class="btn-carrinho">Adicionar ao carrinho </button>
+                    {% endif %}
 
                         {% if user.is_authenticated and user.is_superuser %}
 
