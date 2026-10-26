@@ -161,6 +161,7 @@ body {
 
 .form-container input[type="text"],
 .form-container input[type="email"],
+.form-container input[type="password"],
 .form-container textarea {
     width: 100%;
     padding: 14px 16px;
@@ -335,4 +336,15 @@ body {
 .contato-info p {
     margin-top: 15px;
     font-size: 18px;
+}
+.form-container .campo-senha { position: relative; }
+.form-container .campo-senha input[type] { display: block; padding-right: 48px; }
+.form-container .olho-senha {
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.2rem;
+    color: #555;
+    cursor: pointer;
 }

@@ -1,26 +1,16 @@
 {% load static %}
+
 <!DOCTYPE html>
+
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>IronBox - Entrar</title>
+
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="{% static 'css/layout.css' %}">
-    <style>
-        .form-container input[type="password"] {
-            width: 100%;
-            padding: 14px 16px;
-            border: 1px solid #dcdcdc;
-            border-radius: 14px;
-            font-size: 0.98rem;
-            outline: none;
-        }
-        .form-container .erro { color: #c00; font-size: 0.85rem; margin-top: 4px; }
-        .form-container .ajuda { font-size: 0.8rem; color: #555; margin-top: 4px; }
-        .form-container .ajuda ul { padding-left: 18px; }
-        .form-container .link-extra { margin-top: 16px; text-align: center; }
-    </style>
 </head>
 
 <body class="contact-page">
@@ -68,30 +58,52 @@
         <section class="sessao form-section">
 
             <h2>Entrar</h2>
+
             <p>Entre na sua conta da IronBox.</p>
+
+            {% if form.errors %}
+                <p style="color: red;">
+                    Usuário ou senha incorretos.
+                </p>
+            {% endif %}
 
             <div class="form-container">
 
                 <form method="post">
                     {% csrf_token %}
 
-                    {% for erro in form.non_field_errors %}
-                        <div class="erro">{{ erro }}</div>
-                    {% endfor %}
+                    <div>
+                        <label for="id_username">Usuário</label>
+                        <input
+                            type="text"
+                            name="username"
+                            id="id_username"
+                            placeholder="Digite seu usuário"
+                            required
+                        >
+                    </div>
 
-                    {% for campo in form %}
-                        <div>
-                            <label for="{{ campo.id_for_label }}">{{ campo.label }}</label>
-                            {{ campo }}
-                            {% if campo.help_text %}<div class="ajuda">{{ campo.help_text|safe }}</div>{% endif %}
-                            {% for erro in campo.errors %}<div class="erro">{{ erro }}</div>{% endfor %}
+                    <div>
+                        <label for="id_password">Senha</label>
+                        <div class="campo-senha">
+                            <input
+                                type="password"
+                                name="password"
+                                id="id_password"
+                                placeholder="Digite sua senha"
+                                required
+                            >
+                            <i class="bi bi-eye olho-senha" id="olho-senha"></i>
                         </div>
-                    {% endfor %}
+                    </div>
 
                     <input type="submit" value="Entrar">
+
                 </form>
 
-                <p class="link-extra">Não tem conta? <a href="{% url 'cadastro' %}">Criar conta</a></p>
+                <p style="margin-top: 16px; text-align: center;">
+                    Não tem conta? <a href="{% url 'cadastro' %}">Criar conta</a>
+                </p>
 
             </div>
 
@@ -100,6 +112,17 @@
     </div>
 
 </main>
+
+<script>
+    const campoSenha = document.getElementById('id_password');
+    const olho = document.getElementById('olho-senha');
+
+    olho.addEventListener('click', function () {
+        const mostrando = campoSenha.type === 'text';
+        campoSenha.type = mostrando ? 'password' : 'text';
+        olho.className = (mostrando ? 'bi bi-eye' : 'bi bi-eye-slash') + ' olho-senha';
+    });
+</script>
 
 </body>
 </html>
