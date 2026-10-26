@@ -1,70 +1,118 @@
 
 {% load static %}
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{% static 'blog/css/blog.css' %}">
+
     <title>{{ publicacao.titulo }} | Gold Box</title>
+
+    <!-- Ícones -->
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+
+    <!-- CSS do blog -->
+    <link rel="stylesheet" href="{% static 'blog/css/blog.css' %}">
 </head>
+
 <body>
 
+    <!-- Cabeçalho -->
     <header class="cabecalho">
-        <h1>GOLD BOX</h1>
-        <p>Informação, saúde e desempenho.</p>
+        <div class="logo">
+            <h1>
+                <i class="bi bi-lightning-charge-fill"></i>
+                GOLD BOX
+            </h1>
+            <p>Informação, saúde e desempenho.</p>
+        </div>
 
+        <!-- Menu de navegação -->
         <nav class="menu">
-            <a href="/">Início</a>
-            <a href="{% url 'blog:post_list' %}">Blog</a>
-            <a href="/contato/">Contato</a>
-            <a href="{% url 'login' %}">Entrar</a>
+            <a href="/">
+                <i class="bi bi-house-fill"></i> Início
+            </a>
+
+            <a href="{% url 'blog:post_list' %}">
+                <i class="bi bi-journal-text"></i> Blog
+            </a>
+
+            <a href="/contato/">
+                <i class="bi bi-envelope-fill"></i> Contato
+            </a>
+
+            <a href="{% url 'login' %}">
+                <i class="bi bi-person-fill"></i> Entrar
+            </a>
         </nav>
     </header>
 
+    <!-- Conteúdo da publicação -->
     <main>
-        <article class="publicacao">
-            <h1>{{ publicacao.titulo }}</h1>
+        <article class="publicacao-detalhes">
 
-            <p>{{ publicacao.resumo }}</p>
-
+            <!-- Imagem da publicação -->
             {% if publicacao.imagem %}
                 <img
                     src="{{ publicacao.imagem.url }}"
                     alt="{{ publicacao.titulo }}"
-                    class="imagem-publicacao"
-                >
+                    class="imagem-publicacao-detalhes">
             {% endif %}
 
-            <p>
-                Publicado por {{ publicacao.autor }}
-                em {{ publicacao.data_criacao|date:"d/m/Y H:i" }}
-            </p>
+            <!-- Informações da publicação -->
+            <div class="publicacao-detalhes-informacao">
 
-            <div class="conteudo-publicacao">
-                {{ publicacao.conteudo|linebreaks }}
+                <h1>{{ publicacao.titulo }}</h1>
+
+                <p class="resumo-publicacao">
+                    {{ publicacao.resumo }}
+                </p>
+
+                <div class="dados-publicacao">
+                    <span>
+                        <i class="bi bi-person-fill"></i>
+                        Publicado por {{ publicacao.autor }}
+                    </span>
+
+                    <span>
+                        <i class="bi bi-calendar3"></i>
+                        {{ publicacao.data_criacao|date:"d/m/Y H:i" }}
+                    </span>
+                </div>
+
+                <div class="conteudo-publicacao">
+                    {{ publicacao.conteudo|linebreaks }}
+                </div>
+
             </div>
         </article>
 
-        <nav class="menu">
+        <!-- Botões de navegação e gerenciamento -->
+        <nav class="menu menu-acoes">
+
             <a href="{% url 'blog:post_list' %}">
+                <i class="bi bi-arrow-left"></i>
                 Voltar para o blog
             </a>
 
-            {% if user.is_staff %}
                 <a href="{% url 'blog:post_update' publicacao.pk %}">
+                    <i class="bi bi-pencil-square"></i>
                     Editar publicação
                 </a>
 
                 <a href="{% url 'blog:post_delete' publicacao.pk %}">
+                    <i class="bi bi-trash-fill"></i>
                     Excluir publicação
                 </a>
-            {% endif %}
+
         </nav>
     </main>
 
+    <!-- Rodapé -->
     <footer class="rodape">
-        © 2026 Gold Box — Todos os direitos reservados.
+        <p>© 2026 Gold Box — Todos os direitos reservados.</p>
     </footer>
 
 </body>

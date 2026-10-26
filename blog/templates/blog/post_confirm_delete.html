@@ -1,50 +1,68 @@
+
 {% load static %}
+
 <!DOCTYPE html>
 <html lang="pt-br">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{% static 'blog/css/blog.css' %}">
 
     <title>Excluir publicação | Gold Box</title>
+
+    <link rel="stylesheet" href="{% static 'blog/css/blog.css' %}">
 </head>
 
 <body>
 
-    <header>
-        <h1>Gold Box</h1>
-        <p>Blog</p>
+    <!-- Cabeçalho -->
+    <header class="cabecalho">
+        <div class="logo">
+            <h1>GOLD BOX</h1>
+            <p>Informação, saúde e desempenho.</p>
+        </div>
+
+        <nav class="menu">
+            <a href="/">Início</a>
+            <a href="{% url 'blog:post_list' %}">Blog</a>
+            <a href="/contato/">Contato</a>
+        </nav>
     </header>
 
+    <!-- Confirmação de exclusão -->
     <main>
+        <section class="publicacao">
+            <div class="informacoes-publicacao">
 
-        <h2>Excluir publicação</h2>
+                <h2>Excluir publicação</h2>
 
-        <p>
-            Tem certeza que deseja excluir esta publicação?
-        </p>
+                <p>
+                    Tem certeza de que deseja excluir esta publicação?
+                </p>
 
-        <h3>
-            {{ publicacao.titulo }}
-        </h3>
+                <h3>{{ publicacao.titulo }}</h3>
 
-        <form method="post">
+                <p>Esta ação não poderá ser desfeita.</p>
 
-            {% csrf_token %}
+                <form method="post">
+                    {% csrf_token %}
 
-            <button type="submit">
-                Sim, excluir
-            </button>
+                    <button type="submit" class="btn-ler-mais">
+                        Confirmar exclusão
+                    </button>
+                </form>
 
-            <a href="{% url 'blog:post_detail' publicacao.pk %}">
-                Cancelar
-            </a>
+                <a href="{% url 'blog:post_detail' publicacao.pk %}">
+                    Cancelar e voltar
+                </a>
 
-        </form>
-
+            </div>
+        </section>
     </main>
 
-</body>
+    <!-- Rodapé -->
+    <footer class="rodape">
+        <p>© 2026 Gold Box — Todos os direitos reservados.</p>
+    </footer>
 
+</body>
 </html>
