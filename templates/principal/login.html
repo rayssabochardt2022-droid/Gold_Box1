@@ -1,0 +1,55 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Entrar | Gold Box</title>
+    <link rel="stylesheet" href="{% static 'blog/css/blog.css' %}">
+</head>
+<body>
+    <header class="cabecalho">
+        <div class="logo">
+            <h1>GOLD BOX</h1>
+            <p>Informação, saúde e desempenho.</p>
+        </div>
+    </header>
+
+    <main>
+        <section class="publicacao">
+            <div class="informacoes-publicacao">
+                <h2>Entrar na sua conta</h2>
+
+                {% if form.errors %}
+                    <p>Usuário ou senha incorretos. Tente novamente.</p>
+                {% endif %}
+
+                <form method="post">
+                    {% csrf_token %}
+
+                    <p>
+                        <label for="{{ form.username.id_for_label }}">Usuário</label><br>
+                        {{ form.username }}
+                    </p>
+
+                    <p>
+                        <label for="{{ form.password.id_for_label }}">Senha</label><br>
+                        {{ form.password }}
+                    </p>
+
+                    <input type="hidden" name="next" value="{{ next }}">
+
+                    <button type="submit" class="criar-publicacao">
+                        Entrar
+                    </button>
+                </form>
+
+                <p>
+                    <a href="{% url 'blog:post_list' %}">Voltar ao blog</a>
+                </p>
+            </div>
+        </section>
+    </main>
+</body>
+</html>

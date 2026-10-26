@@ -355,3 +355,16 @@ form button[type="submit"] {
         flex-direction: row;
     }
 }
+
+/* Nome do usuário conectado */
+.usuario-logado {
+    color: #f5b51b;
+    font-weight: bold;
+}
+
+/* Responsividade dos botões em celulares pequenos */
+@media (max-width: 800px) {
+    .acoes-publicacao {
+        flex-direction: column;
+    }
+}
