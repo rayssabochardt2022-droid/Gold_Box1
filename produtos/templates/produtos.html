@@ -16,6 +16,8 @@
     <link rel="stylesheet" href="{% static 'css/produtos.css' %}">
 </head>
 
+<body class="pagina-produtos">
+
 <script>
 function alternarDescricao(botao) {
     const container = botao.closest('.descricao-container');
@@ -26,7 +28,6 @@ function alternarDescricao(botao) {
     botao.setAttribute('aria-expanded', expandida);
 }
 </script>
-<body class="pagina-produtos">
 
 <main class="pg-container">
 
@@ -36,80 +37,138 @@ function alternarDescricao(botao) {
             <h2>Iron Box</h2>
         </div>
 
-        <ul>
-            <li><a href="{% url 'home' %}"><i class="bi bi-house-heart-fill"></i><span>Home</span></a></li>
-            <li><a href="{% url 'login' %}"><i class="bi bi-arrow-through-heart-fill"></i><span>Entrar</span></a></li>
-            <li><a href="{% url 'contato' %}"><i class="bi bi-person-heart"></i><span>Contato</span></a></li>
-        </ul>
+
+<ul>
+    <li>
+        <a href="{% url 'home' %}">
+            <i class="bi bi-house-heart-fill"></i>
+            <span>Home</span>
+        </a>
+    </li>
+
+    {% if user.is_authenticated %}
+        <li>
+            <form method="post" action="{% url 'logout' %}">
+                {% csrf_token %}
+                <button type="submit" class="btn-sair">
+                    <i class="bi bi-box-arrow-right"></i>
+                    <span>Sair da conta</span>
+                </button>
+            </form>
+        </li>
+    {% else %}
+        <li>
+            <a href="{% url 'login' %}">
+                <i class="bi bi-arrow-through-heart-fill"></i>
+                <span>Entrar</span>
+            </a>
+        </li>
+    {% endif %}
+
+    <li>
+        <a href="{% url 'contato' %}">
+            <i class="bi bi-person-heart"></i>
+            <span>Contato</span>
+        </a>
+    </li>
+</ul>
+
 
     </nav>
 
-
     <div class="conteudo">
 
-{% if messages %}
-    {% for message in messages %}
-        <p class="mensagem-sucesso">{{ message }}</p>
-    {% endfor %}
-{% endif %}
+        {% if messages %}
+            {% for message in messages %}
+                <p class="mensagem-sucesso">{{ message }}</p>
+            {% endfor %}
+        {% endif %}
 
         <section class="sessao">
 
-<div class="cadastrar">
-            <a href="{% url 'cadastro' %}" class="btn-cadastrar">Novo Produto</a>
-
-                <a href="{% url 'editar_produto' %}" class="btn-cadastrar">Editar Produto</a>
-
-                </div>
-
             <h2>Produtos disponíveis</h2>
 
-<div class="produtos">
-
-    {% for produto in produtos %}
-        <div class="produto">
-
-            {% if produto.imagem %}
-                <img src="{{ produto.imagem.url }}"
-                     alt="{{ produto.nome }}">
-            {% else %}
-                <div class="sem-imagem">Sem imagem</div>
+            {% if user.is_authenticated and user.is_superuser %}
+                <div class="cadastrar">
+                    <a href="{% url 'cadastro' %}" class="btn-cadastrar">
+                        <i class="bi bi-plus-circle"></i>
+                        Novo Produto
+                    </a>
+                </div>
             {% endif %}
 
-            <h3>{{ produto.nome }}</h3>
+            <div class="produtos">
 
-            <p>{{ produto.marca }}</p>
+                {% for produto in produtos %}
 
-            <strong>R$ {{ produto.preco|floatformat:2 }}</strong>
+                    <div class="produto">
 
-            <p>Estoque: {{ produto.estoque }}</p>
+                        {% if produto.imagem %}
+                            <img src="{{ produto.imagem.url }}"
+                                 alt="{{ produto.nome }}">
+                        {% else %}
+                            <div class="sem-imagem">Sem imagem</div>
+                        {% endif %}
 
+                        <h3>{{ produto.nome }}</h3>
 
-    <div class="descricao-container">
-        <p class="produto-descricao">
-         {{ produto.descricao|default:"Sem descrição cadastrada" }}
-      </p>
+                        <p>{{ produto.marca }}</p>
 
-     {% if produto.descricao %}
-         <button type="button"
-                   class="btn-ler-mais"
-                    aria-expanded="false"
-                    onclick="alternarDescricao(this)">
-               Ler mais
-         </button>
-     {% endif %}
-    </div>
+                        <strong>R$ {{ produto.preco|floatformat:2 }}</strong>
 
+                        <p class="produto-estoque">
+                            Estoque: {{ produto.estoque }}
+                        </p>
 
-            <button type="button">Comprar</button>
+                        <div class="descricao-container">
 
-        </div>
-    {% empty %}
-        <p>Nenhum produto cadastrado ainda.</p>
-    {% endfor %}
+                            <p class="produto-descricao">
+                                {{ produto.descricao|default:"Sem descrição cadastrada" }}
+                            </p>
 
-</div>
+                            {% if produto.descricao %}
+                                <button type="button"
+                                        class="btn-ler-mais"
+                                        aria-expanded="false"
+                                        onclick="alternarDescricao(this)">
+                                    Ler mais
+                                </button>
+                            {% endif %}
 
+                        </div>
+
+                        {% if user.is_authenticated and user.is_superuser %}
+
+                            <a href="{% url 'editar_produto' produto.id %}"
+                               class="btn-editar">
+                                <i class="bi bi-pencil-square"></i>
+                                Editar
+                            </a>
+
+                            <form method="post"
+                                  action="{% url 'excluir_produto' produto.id %}"
+                                  onsubmit="return confirm('Tem certeza de que deseja excluir este produto?');">
+
+                                {% csrf_token %}
+
+                                <button type="submit" class="btn-excluir">
+                                    <i class="bi bi-trash"></i>
+                                    Excluir
+                                </button>
+
+                            </form>
+
+                        {% endif %}
+
+                    </div>
+
+                {% empty %}
+
+                    <p>Nenhum produto cadastrado ainda.</p>
+
+                {% endfor %}
+
+            </div>
 
         </section>
 

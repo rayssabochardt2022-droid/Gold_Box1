@@ -1,0 +1,138 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Editar Produto | Iron Box</title>
+
+    <link rel="stylesheet"
+          href="{% static 'css/layout.css' %}">
+
+    <link rel="stylesheet"
+          href="{% static 'css/produtos.css' %}">
+</head>
+
+<body>
+
+<main class="pg-container">
+    <section class="form-produto">
+
+        <h1>Editar Produto</h1>
+
+        {% if erro %}
+            <div class="erro">{{ erro }}</div>
+        {% endif %}
+
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <div class="campo">
+                <label for="nome">Nome do produto *</label>
+                <input type="text" id="nome" name="nome"
+                       maxlength="150" required
+                       value="{{ produto.nome }}">
+            </div>
+
+            <div class="campo">
+                <label for="categoria">Categoria *</label>
+
+                <select id="categoria" name="categoria" required>
+                    <option value="whey"
+                        {% if produto.categoria == 'whey' %}selected{% endif %}>
+                        Whey Protein
+                    </option>
+
+                    <option value="creatina"
+                        {% if produto.categoria == 'creatina' %}selected{% endif %}>
+                        Creatina
+                    </option>
+
+                    <option value="pre_treino"
+                        {% if produto.categoria == 'pre_treino' %}selected{% endif %}>
+                        Pré-treino
+                    </option>
+
+                    <option value="glutamina"
+                        {% if produto.categoria == 'glutamina' %}selected{% endif %}>
+                        Glutamina
+                    </option>
+
+                    <option value="hipercalorico"
+                        {% if produto.categoria == 'hipercalorico' %}selected{% endif %}>
+                        Hipercalórico
+                    </option>
+
+                    <option value="termogenico"
+                        {% if produto.categoria == 'termogenico' %}selected{% endif %}>
+                        Termogênico
+                    </option>
+
+                    <option value="outros"
+                        {% if produto.categoria == 'outros' %}selected{% endif %}>
+                        Outros
+                    </option>
+                </select>
+            </div>
+
+            <div class="campo">
+                <label for="marca">Marca *</label>
+                <input type="text" id="marca" name="marca"
+                       maxlength="100" required
+                       value="{{ produto.marca }}">
+            </div>
+
+            <div class="campo">
+                <label for="preco">Preço (R$) *</label>
+                <input type="number" id="preco" name="preco"
+                       min="0.01" step="0.01" required
+                       value="{{ produto.preco }}">
+            </div>
+
+            <div class="campo">
+                <label for="estoque">Estoque *</label>
+                <input type="number" id="estoque" name="estoque"
+                       min="0" step="1" required
+                       value="{{ produto.estoque }}">
+            </div>
+
+            <div class="campo">
+                <label for="descricao">Descrição</label>
+                <textarea id="descricao" name="descricao">{{ produto.descricao }}</textarea>
+            </div>
+
+            <div class="campo">
+                <label for="imagem">Imagem do produto</label>
+
+                {% if produto.imagem %}
+                    <p>Imagem atual:</p>
+                    <img src="{{ produto.imagem.url }}"
+                         alt="{{ produto.nome }}"
+                         style="width: 120px; height: 120px; object-fit: contain;">
+                {% endif %}
+
+                <input type="file" id="imagem" name="imagem"
+                       accept="image/*">
+
+                <small>Deixe vazio para manter a imagem atual.</small>
+            </div>
+
+            <div class="botoes">
+                <button type="submit" class="botao principal">
+                    Salvar alterações
+                </button>
+
+                <a href="{% url 'produtos' %}"
+                   class="botao secundario">
+                    Cancelar
+                </a>
+            </div>
+
+        </form>
+    </section>
+</main>
+
+</body>
+</html>

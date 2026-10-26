@@ -313,4 +313,35 @@ body {
     margin-top: 15px;
     font-size: 18px;
 }
+/* Botão Sair da conta */
+.menu .btn-sair {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    width: 100%;
+    padding: 10px;
+
+    background: transparent;
+    color: inherit;
+
+    border: none;
+    border-radius: 8px;
+
+    font-family: inherit;
+    font-size: inherit;
+    text-align: left;
+
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.menu .btn-sair:hover {
+    background-color: #9703d1;
+    color: #fff;
+}
+
+.menu li form {
+    width: 100%;
+}
 

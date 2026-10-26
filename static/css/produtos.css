@@ -246,5 +246,108 @@
 order: 3;
 }
 
+.btn-editar {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+
+    width: 100%;
+    max-width: 220px;
+    margin: 8px auto 0;
+    padding: 10px 12px;
+    box-sizing: border-box;
+
+    background-color: #eee5f4;
+    color: #7b20b5;
+
+    border: 1px solid #bc62f0;
+    border-radius: 8px;
+
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: bold;
+    text-decoration: none;
+
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn-editar:hover {
+    background-color: #bc62f0;
+    color: #fff;
+    transform: translateY(-2px);
+}
+
+/* Botão Editar dentro do card */
+.produto .btn-editar {
+    order: 7;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+
+    width: 100%;
+    max-width: 220px;
+    margin: 8px auto 0;
+    padding: 10px 12px;
+    box-sizing: border-box;
+
+    background-color: #eee5f4;
+    color: #9703d1;
+
+    border: 1px solid #bc62f0;
+    border-radius: 8px;
+
+    font-size: 14px;
+    font-weight: bold;
+    text-decoration: none;
+
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.produto .btn-editar:hover {
+    background-color: #bc62f0;
+    color: #fff;
+    transform: translateY(-2px);
+}
+
+.produto form {
+    order: 6;
+    width: 100%;
+    max-width: 220px;
+    margin: auto auto 0;
+}
+
+/* Botão Excluir */
+.produto .btn-excluir {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+
+    width: 100%;
+    padding: 10px 12px;
+    box-sizing: border-box;
+
+    background-color: #dc2626;
+    color: #fff;
+
+    border: none;
+    border-radius: 8px;
+
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: bold;
+
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.produto .btn-excluir:hover {
+    background-color: #b91c1c;
+    transform: scale(1.02);
+}
 
 

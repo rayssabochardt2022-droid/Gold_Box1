@@ -2,6 +2,8 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from .models import Produto
 from django.shortcuts import render, redirect, get_object_or_404
+from django.views.decorators.http import require_POST
+
 
 
 def produtos(request):
@@ -145,3 +147,10 @@ def editar_produto(request, id):
         'produto': produto,
         'categorias': Produto.CATEGORIAS,
     })
+
+@require_POST
+def excluir_produto(request, id):
+    produto = get_object_or_404(Produto, id=id)
+    produto.delete()
+
+    return redirect('produtos')
