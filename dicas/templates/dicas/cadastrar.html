@@ -1,54 +1,59 @@
-
+{% load static %}
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Cadastrar Dica | Gold Box</title>
+    <title>Cadastrar Dica | Iron Box</title>
+
+    <link rel="stylesheet" href="{% static 'dicas/dicas.css' %}">
 </head>
 
 <body>
 
-    <h1>Cadastrar nova dica</h1>
+    <div class="container">
 
-    <form method="post">
+        <h1>Cadastrar nova dica</h1>
 
-        {% csrf_token %}
+        <form method="post" class="formulario">
 
-        {{ form.non_field_errors }}
+            {% csrf_token %}
 
-        <div>
-            <label for="{{ form.titulo.id_for_label }}">Título:</label>
-            {{ form.titulo }}
-            {{ form.titulo.errors }}
+            {{ form.non_field_errors }}
+
+            <div>
+                <label for="{{ form.titulo.id_for_label }}">Título:</label>
+                {{ form.titulo }}
+                {{ form.titulo.errors }}
+            </div>
+
+            <div>
+                <label for="{{ form.conteudo.id_for_label }}">Conteúdo:</label>
+                {{ form.conteudo }}
+                {{ form.conteudo.errors }}
+            </div>
+
+            <div>
+                <label for="{{ form.categoria.id_for_label }}">Categoria:</label>
+                {{ form.categoria }}
+                {{ form.categoria.errors }}
+            </div>
+
+            <button type="submit" class="botao-principal">
+                Cadastrar dica
+            </button>
+
+        </form>
+
+        <div class="voltar">
+            <a href="{% url 'lista_dicas' %}">
+                Voltar para dicas
+            </a>
         </div>
 
-        <br>
-
-        <div>
-            <label for="{{ form.conteudo.id_for_label }}">Conteúdo:</label>
-            {{ form.conteudo }}
-            {{ form.conteudo.errors }}
-        </div>
-
-        <br>
-
-        <div>
-            <label for="{{ form.categoria.id_for_label }}">Categoria:</label>
-            {{ form.categoria }}
-            {{ form.categoria.errors }}
-        </div>
-
-        <br>
-
-        <button type="submit">Cadastrar dica</button>
-
-    </form>
-
-    <br>
-
-    <a href="{% url 'lista_dicas' %}">Voltar para dicas</a>
+    </div>
 
 </body>
 </html>

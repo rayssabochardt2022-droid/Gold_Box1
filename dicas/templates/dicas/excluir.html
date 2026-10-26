@@ -1,4 +1,4 @@
-
+{% load static %}
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -6,40 +6,47 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Excluir Dica | Gold Box</title>
+    <title>Excluir Dica | Iron Box</title>
+
+    <link rel="stylesheet" href="{% static 'dicas/dicas.css' %}">
 </head>
 
 <body>
 
-    <h1>Excluir dica</h1>
+    <div class="container">
 
-    <p>Tem certeza de que deseja excluir esta dica?</p>
+        <div class="confirmacao">
 
-    <h2>{{ dica.titulo }}</h2>
+            <h1>Excluir dica</h1>
 
-    <p>{{ dica.conteudo }}</p>
+            <p>Tem certeza de que deseja excluir esta dica?</p>
 
-    <p>
-        <strong>Categoria:</strong>
-        {{ dica.categoria }}
-    </p>
+            <h2>{{ dica.titulo }}</h2>
 
-    <form method="post">
+            <p>{{ dica.conteudo }}</p>
 
-        {% csrf_token %}
+            <p>
+                <strong>Categoria:</strong>
+                {{ dica.categoria }}
+            </p>
 
-        <button type="submit">
-            Sim, excluir
-        </button>
+            <form method="post">
+                {% csrf_token %}
 
-    </form>
+                <button type="submit" class="botao-excluir">
+                    Sim, excluir
+                </button>
+            </form>
 
-    <br>
+            <div class="voltar">
+                <a href="{% url 'lista_dicas' %}">
+                    Cancelar e voltar para dicas
+                </a>
+            </div>
 
-    <a href="{% url 'lista_dicas' %}">
-        Cancelar e voltar para dicas
-    </a>
+        </div>
+
+    </div>
 
 </body>
-
 </html>

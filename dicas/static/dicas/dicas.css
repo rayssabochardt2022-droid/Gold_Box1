@@ -1,0 +1,135 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap');
+
+body {
+    font-family: "Playfair Display", serif;
+    background-color: #eac6ff;
+    color: #000;
+    margin: 0;
+    padding: 0;
+}
+.menu {
+    width: 100%;
+    box-sizing: border-box;
+    margin: 0;
+}
+
+.container {
+    max-width: 900px;
+    margin: auto;
+}
+
+h1 {
+    text-align: center;
+    color: #000;
+}
+
+h2 {
+    color: #000;
+}
+
+.topo-lista {
+    margin: 20px 0;
+}
+
+.dica {
+    background-color: #fff;
+    padding: 20px;
+    margin: 20px 0;
+    border-radius: 12px;
+}
+
+.dica-cabecalho {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+}
+
+.dica-acoes {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.botao-cadastrar,
+.botao-editar,
+.botao-excluir,
+.botao-principal {
+    display: inline-block;
+    background-color: #bc62f0;
+    color: #fff;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: "Playfair Display", serif;
+    font-size: 14px;
+    text-align: center;
+    text-decoration: none;
+}
+
+.botao-excluir {
+    background-color: #eac6ff;
+    color: #000;
+}
+
+.formulario,
+.confirmacao {
+    background-color: #fff;
+    max-width: 600px;
+    margin: 25px auto;
+    padding: 25px;
+    border-radius: 12px;
+    box-sizing: border-box;
+}
+
+.formulario label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.formulario input,
+.formulario textarea,
+.formulario select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #bc62f0;
+    border-radius: 8px;
+    font-family: "Playfair Display", serif;
+    box-sizing: border-box;
+}
+
+.formulario textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+
+.voltar {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.mensagem-vazia {
+    text-align: center;
+    margin: 30px 0;
+}
+
+@media (max-width: 600px) {
+    body {
+        padding: 15px;
+    }
+
+    .dica-cabecalho {
+        align-items: flex-start;
+    }
+
+    .dica {
+        padding: 15px;
+    }
+
+    .formulario,
+    .confirmacao {
+        padding: 18px;
+    }
+}
