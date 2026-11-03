@@ -19,6 +19,7 @@ from django.urls import path, include
 from institucional.views import home, contato
 from django.contrib.auth import views as auth_views
 
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', home, name='home'),
@@ -33,4 +34,5 @@ urlpatterns = [
     ),
 
     path('dicas/', include('dicas.urls')),
+
 ]
