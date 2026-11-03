@@ -25,8 +25,9 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', home, name='home'),
     path('contato/', contato, name='contato'),
-path('login/', auth_views.LoginView.as_view( template_name='principal/login.html'), name='login'),
+    path('login/', auth_views.LoginView.as_view( template_name='principal/login.html'), name='login'),
     path('produtos/', include('produtos.urls')),
+
 
 
 ]

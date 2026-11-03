@@ -2,8 +2,8 @@ from django.shortcuts import render
 
 
 def home(request):
-    return render(request, 'principal/index.html')
+    return render(request, 'institucional/index.html')
 def contato(request):
-    return render(request, 'principal/contato.html')
+    return render(request, 'institucional/contato.html')
 def cadastro(request):
-    return render(request, 'principal/cadastro.html')
+    return render(request, 'institucional/cadastro.html')
