@@ -1,0 +1,175 @@
+
+/* ========================================
+   FORMULÁRIO DE CADASTRO DE PRODUTOS
+======================================== */
+
+.pg-container {
+    width: 100%;
+    min-height: calc(100vh - 70px);
+    padding: 40px 20px;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.form-produto {
+    width: 100%;
+    max-width: 650px;
+    padding: 30px;
+    box-sizing: border-box;
+    background-color: var(--cor-clara, #fff);
+    border: 1px solid rgba(188, 98, 240, 0.3);
+    border-radius: 14px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+}
+
+.form-produto h1 {
+    margin: 0 0 25px;
+    color: #000;
+    font-size: 28px;
+    text-align: center;
+}
+
+.form-produto form {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.form-produto .campo {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    width: 100%;
+}
+
+.form-produto .campo label {
+    color: #29202f;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.form-produto .obrigatorio {
+    color: #9703d1;
+}
+
+.form-produto input[type="text"],
+.form-produto input[type="number"],
+.form-produto select,
+.form-produto textarea {
+    width: 100%;
+    min-height: 44px;
+    padding: 11px 12px;
+    box-sizing: border-box;
+    border: 1px solid #d4c4dc;
+    border-radius: 7px;
+    background-color: #fff;
+    color: #222;
+    font-family: inherit;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.form-produto textarea {
+    min-height: 110px;
+    resize: vertical;
+}
+
+.form-produto input:focus,
+.form-produto select:focus,
+.form-produto textarea:focus {
+    border-color: #bc62f0;
+    box-shadow: 0 0 0 3px rgba(188, 98, 240, 0.15);
+}
+
+.form-produto input[type="file"] {
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    border: 1px dashed #bc62f0;
+    border-radius: 7px;
+    background-color: #faf5ff;
+    color: #333;
+    font-size: 13px;
+}
+
+.form-produto .botoes {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 8px;
+}
+
+.form-produto .botao {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    min-height: 44px;
+    padding: 11px 20px;
+    box-sizing: border-box;
+    border: none;
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: bold;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.2s;
+}
+
+.form-produto .botao.principal {
+    background-color: #bc62f0;
+    color: #fff;
+}
+
+.form-produto .botao.principal:hover {
+    background-color: #9703d1;
+    transform: translateY(-2px);
+}
+
+.form-produto .botao.secundario {
+    background-color: #eee5f4;
+    color: #54216d;
+}
+
+.form-produto .botao.secundario:hover {
+    background-color: #dfc8ed;
+}
+
+.form-produto .erro {
+    margin-bottom: 20px;
+    padding: 12px;
+    border: 1px solid #e5a4a4;
+    border-radius: 7px;
+    background-color: #fff0f0;
+    color: #a00000;
+}
+
+/* Adaptação para celulares */
+@media (max-width: 600px) {
+    .pg-container {
+        padding: 20px 12px;
+    }
+
+    .form-produto {
+        padding: 20px 16px;
+    }
+
+    .form-produto h1 {
+        font-size: 23px;
+    }
+
+    .form-produto .botoes {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .form-produto .botao {
+        width: 100%;
+    }
+}
