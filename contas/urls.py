@@ -1,6 +1,5 @@
 from django.urls import path
 
-from .views import CadastroView, GoldBoxLoginView, GoldBoxLogoutView
 
 urlpatterns = [
     path('cadastro/', CadastroView.as_view(), name='cadastro'),
