@@ -16,33 +16,33 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from django.contrib.auth import views as auth_views
 from django.conf import settings
 from django.conf.urls.static import static
 
-from institucional.views import home, contato
+from principal.views import home, contato
+from contas.views import GoldBoxLoginView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
 
-    # Páginas institucionais
+    # Páginas principais
     path('', home, name='home'),
     path('contato/', contato, name='contato'),
 
-    # Login principal
+    # Login
     path(
         'login/',
-        auth_views.LoginView.as_view(
-            template_name='contas/login.html'
-        ),
+        GoldBoxLoginView.as_view(),
         name='login'
     ),
 
     # Aplicativos
     path('contas/', include('contas.urls')),
     path('produtos/', include('produtos.urls')),
+    path('blog/', include('blog.urls')),
     path('dicas/', include('dicas.urls')),
 ]
+
 if settings.DEBUG:
     urlpatterns += static(
         settings.MEDIA_URL,

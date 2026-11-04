@@ -1,0 +1,370 @@
+
+/* Configurações gerais */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #05090c;
+    color: #f1f3f5;
+    line-height: 1.6;
+}
+
+/* Cabeçalho e menu */
+.cabecalho {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 20px 8%;
+    background: #080e12;
+    border-bottom: 1px solid #283943;
+}
+
+.logo h1,
+.apresentacao h2 {
+    color: #f5b51b;
+}
+
+.logo p,
+.apresentacao p {
+    color: #b8c5ce;
+}
+
+.menu {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.menu a {
+    color: #f1f3f5;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.menu a:hover {
+    color: #f5b51b;
+}
+
+/* Apresentação */
+.apresentacao {
+    padding: 30px 8%;
+    background: #0b1319;
+}
+
+.apresentacao h2 {
+    font-size: 30px;
+}
+
+/* Área principal */
+main {
+    width: 100%;
+    max-width: 1600px;
+    min-height: 380px;
+    margin: auto;
+    padding: 30px 25px;
+}
+
+.titulo-sessao {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+/* Botões principais */
+.criar-publicacao,
+.btn-ler-mais {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.criar-publicacao {
+    background: #f5b51b;
+    color: #080e12;
+}
+
+.btn-ler-mais {
+    background: #10a968;
+    color: white;
+    margin-top: auto;
+}
+
+.criar-publicacao:hover {
+    background: #ffd15c;
+}
+
+.btn-ler-mais:hover {
+    background: #087f4d;
+}
+
+/* Lista de publicações */
+.lista-publicacoes {
+    display: grid;
+    width: 100%;
+    padding: 0;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 24px;
+}
+
+/* Cartões */
+.publicacao {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    overflow: hidden;
+    background: #0b141b;
+    border: 1px solid #283943;
+    border-radius: 10px;
+}
+
+.publicacao:hover {
+    border-color: #f5b51b;
+}
+
+/* Informações dos cartões */
+.informacoes-publicacao {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-width: 0;
+    padding: 18px;
+}
+
+.informacoes-publicacao h3 {
+    color: #f5b51b;
+    margin-bottom: 10px;
+    overflow-wrap: anywhere;
+}
+
+.resumo-publicacao {
+    color: #b8c5ce;
+    margin-bottom: 15px;
+    overflow-wrap: anywhere;
+}
+
+.dados-publicacao {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    color: #91a2ad;
+    font-size: 13px;
+    margin-bottom: 15px;
+}
+
+/* Imagens dos cartões */
+.imagem-container {
+    width: 100%;
+    height: 280px;
+    overflow: hidden;
+    background: #ffffff;
+}
+
+.imagem-publicacao {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center;
+}
+
+/* Imagem na página de detalhes */
+.publicacao-detalhes {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    min-width: 0;
+    overflow: hidden;
+    background: #0b141b;
+    border: 1px solid #283943;
+    border-radius: 10px;
+}
+
+.imagem-publicacao-detalhes {
+    display: block;
+    width: 50%;
+    max-width: 50%;
+    height: auto;
+    object-fit: contain;
+}
+
+.publicacao-detalhes-informacao {
+    flex: 1;
+    min-width: 0;
+    padding: 20px;
+    overflow-wrap: anywhere;
+}
+
+/* Imagem alternativa */
+.sem-imagem {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100%;
+    color: #b8c5ce;
+}
+
+.sem-imagem i {
+    color: #f5b51b;
+    font-size: 35px;
+}
+
+/* Mensagem sem publicações */
+.sem-publicacoes {
+    grid-column: 1 / -1;
+    padding: 30px;
+    text-align: center;
+    color: #b8c5ce;
+}
+
+/* Conteúdo completo */
+.conteudo-publicacao {
+    margin-top: 20px;
+    overflow-wrap: anywhere;
+}
+
+.conteudo-publicacao img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Botões Editar e Excluir */
+.acoes-publicacao {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 12px;
+}
+
+.botao-editar,
+.botao-excluir {
+    display: inline-flex;
+    flex: 1;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+    min-width: 0;
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.botao-editar {
+    background: #f5b51b;
+    color: #080e12;
+}
+
+.botao-editar:hover {
+    background: #ffd15c;
+}
+
+.botao-excluir {
+    background: #dc3545;
+    color: #ffffff;
+}
+
+.botao-excluir:hover {
+    background: #b02a37;
+}
+
+/* Página de confirmação de exclusão */
+form button[type="submit"] {
+    font-family: inherit;
+    font-size: 14px;
+}
+
+/* Rodapé */
+.rodape {
+    padding: 20px;
+    text-align: center;
+    background: #080e12;
+    color: #aab7c0;
+    border-top: 1px solid #283943;
+}
+
+/* Responsividade para tablets */
+@media (max-width: 900px) {
+    .lista-publicacoes {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .imagem-container {
+        height: 240px;
+    }
+}
+
+/* Responsividade para celulares */
+@media (max-width: 600px) {
+    .cabecalho {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 20px;
+    }
+
+    .apresentacao {
+        padding: 25px 20px;
+    }
+
+    main {
+        padding: 25px 15px;
+    }
+
+    .lista-publicacoes {
+        grid-template-columns: 1fr;
+    }
+
+    .imagem-container {
+        height: 220px;
+    }
+
+    .publicacao-detalhes {
+        flex-direction: column;
+    }
+
+    .imagem-publicacao-detalhes {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .publicacao-detalhes-informacao {
+        width: 100%;
+        padding: 15px;
+    }
+
+    .acoes-publicacao {
+        flex-direction: row;
+    }
+}
+
+/* Nome do usuário conectado */
+.usuario-logado {
+    color: #f5b51b;
+    font-weight: bold;
+}
+
+/* Responsividade dos botões em celulares pequenos */
+@media (max-width: 800px) {
+    .acoes-publicacao {
+        flex-direction: column;
+    }
+}
