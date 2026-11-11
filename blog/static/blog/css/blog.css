@@ -1,5 +1,7 @@
 
-/* Configurações gerais */
+/* CONFIGURAÇÕES GERAIS */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&display=swap');
+
 * {
     margin: 0;
     padding: 0;
@@ -7,13 +9,13 @@
 }
 
 body {
-    font-family: Arial, sans-serif;
+    font-family: "Playfair Display", serif;
     background: #05090c;
     color: #f1f3f5;
     line-height: 1.6;
 }
 
-/* Cabeçalho e menu */
+/* CABEÇALHO */
 .cabecalho {
     display: flex;
     justify-content: space-between;
@@ -26,8 +28,11 @@ body {
 }
 
 .logo h1,
-.apresentacao h2 {
-    color: #f5b51b;
+.apresentacao h2,
+.informacoes-publicacao h3,
+.sem-imagem i,
+.usuario-logado {
+    color: #dd63ff;
 }
 
 .logo p,
@@ -49,10 +54,10 @@ body {
 }
 
 .menu a:hover {
-    color: #f5b51b;
+    color: #dd63ff;
 }
 
-/* Apresentação */
+/* APRESENTAÇÃO */
 .apresentacao {
     padding: 30px 8%;
     background: #0b1319;
@@ -62,7 +67,7 @@ body {
     font-size: 30px;
 }
 
-/* Área principal */
+/* ÁREA PRINCIPAL */
 main {
     width: 100%;
     max-width: 1600px;
@@ -80,9 +85,11 @@ main {
     margin-bottom: 25px;
 }
 
-/* Botões principais */
+/* BOTÕES */
 .criar-publicacao,
-.btn-ler-mais {
+.btn-ler-mais,
+.botao-editar,
+.botao-excluir {
     display: inline-flex;
     justify-content: center;
     align-items: center;
@@ -93,52 +100,62 @@ main {
     text-decoration: none;
     font-weight: bold;
     cursor: pointer;
+    font-family: inherit;
 }
 
-.criar-publicacao {
-    background: #f5b51b;
+.criar-publicacao,
+.botao-editar {
+    background: #dd63ff;
     color: #080e12;
 }
 
 .btn-ler-mais {
-    background: #10a968;
+    background: #bc62f0;
     color: white;
     margin-top: auto;
 }
 
-.criar-publicacao:hover {
-    background: #ffd15c;
+.botao-excluir {
+    background: #dc3545;
+    color: white;
 }
 
+.criar-publicacao:hover,
+.botao-editar:hover,
 .btn-ler-mais:hover {
-    background: #087f4d;
+    background: #a84cdb;
 }
 
-/* Lista de publicações */
+.botao-excluir:hover {
+    background: #b02a37;
+}
+
+/* LISTA DE PUBLICAÇÕES */
 .lista-publicacoes {
     display: grid;
     width: 100%;
-    padding: 0;
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 24px;
 }
 
-/* Cartões */
+.publicacao,
+.publicacao-detalhes {
+    background: #0b141b;
+    border: 1px solid #283943;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
 .publicacao {
     display: flex;
     flex-direction: column;
     min-width: 0;
-    overflow: hidden;
-    background: #0b141b;
-    border: 1px solid #283943;
-    border-radius: 10px;
 }
 
 .publicacao:hover {
-    border-color: #f5b51b;
+    border-color: #dd63ff;
 }
 
-/* Informações dos cartões */
 .informacoes-publicacao {
     display: flex;
     flex-direction: column;
@@ -148,15 +165,18 @@ main {
 }
 
 .informacoes-publicacao h3 {
-    color: #f5b51b;
     margin-bottom: 10px;
+}
+
+.resumo-publicacao,
+.conteudo-publicacao,
+.publicacao-detalhes-informacao {
     overflow-wrap: anywhere;
 }
 
 .resumo-publicacao {
     color: #b8c5ce;
     margin-bottom: 15px;
-    overflow-wrap: anywhere;
 }
 
 .dados-publicacao {
@@ -168,7 +188,7 @@ main {
     margin-bottom: 15px;
 }
 
-/* Imagens dos cartões */
+/* IMAGENS */
 .imagem-container {
     width: 100%;
     height: 280px;
@@ -177,23 +197,17 @@ main {
 }
 
 .imagem-publicacao {
-    display: block;
     width: 100%;
     height: 100%;
+    display: block;
     object-fit: contain;
-    object-position: center;
 }
 
-/* Imagem na página de detalhes */
 .publicacao-detalhes {
     display: flex;
     align-items: flex-start;
     gap: 20px;
     min-width: 0;
-    overflow: hidden;
-    background: #0b141b;
-    border: 1px solid #283943;
-    border-radius: 10px;
 }
 
 .imagem-publicacao-detalhes {
@@ -208,10 +222,8 @@ main {
     flex: 1;
     min-width: 0;
     padding: 20px;
-    overflow-wrap: anywhere;
 }
 
-/* Imagem alternativa */
 .sem-imagem {
     display: flex;
     justify-content: center;
@@ -222,22 +234,11 @@ main {
 }
 
 .sem-imagem i {
-    color: #f5b51b;
     font-size: 35px;
 }
 
-/* Mensagem sem publicações */
-.sem-publicacoes {
-    grid-column: 1 / -1;
-    padding: 30px;
-    text-align: center;
-    color: #b8c5ce;
-}
-
-/* Conteúdo completo */
 .conteudo-publicacao {
     margin-top: 20px;
-    overflow-wrap: anywhere;
 }
 
 .conteudo-publicacao img {
@@ -245,7 +246,14 @@ main {
     height: auto;
 }
 
-/* Botões Editar e Excluir */
+.sem-publicacoes {
+    grid-column: 1 / -1;
+    padding: 30px;
+    text-align: center;
+    color: #b8c5ce;
+}
+
+/* AÇÕES DAS PUBLICAÇÕES */
 .acoes-publicacao {
     display: flex;
     flex-wrap: wrap;
@@ -255,45 +263,12 @@ main {
 
 .botao-editar,
 .botao-excluir {
-    display: inline-flex;
     flex: 1;
-    justify-content: center;
-    align-items: center;
-    gap: 6px;
     min-width: 0;
-    padding: 10px;
-    border-radius: 5px;
-    text-align: center;
-    text-decoration: none;
-    font-weight: bold;
     font-size: 14px;
 }
 
-.botao-editar {
-    background: #f5b51b;
-    color: #080e12;
-}
-
-.botao-editar:hover {
-    background: #ffd15c;
-}
-
-.botao-excluir {
-    background: #dc3545;
-    color: #ffffff;
-}
-
-.botao-excluir:hover {
-    background: #b02a37;
-}
-
-/* Página de confirmação de exclusão */
-form button[type="submit"] {
-    font-family: inherit;
-    font-size: 14px;
-}
-
-/* Rodapé */
+/* RODAPÉ */
 .rodape {
     padding: 20px;
     text-align: center;
@@ -302,7 +277,118 @@ form button[type="submit"] {
     border-top: 1px solid #283943;
 }
 
-/* Responsividade para tablets */
+/* FORMULÁRIO DE PUBLICAÇÃO */
+.pagina-publicacao {
+    min-height: 100vh;
+    background: #05090c;
+    color: #f1f3f5;
+}
+
+.pagina-publicacao main {
+    width: min(800px, 100%);
+    max-width: 800px;
+    margin: 35px auto;
+    padding: 20px;
+}
+
+.pagina-publicacao .formulario-publicacao h2 {
+    color: #dd63ff;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.pagina-publicacao .descricao-formulario {
+    text-align: center;
+    color: #b8c5ce;
+    margin-bottom: 35px;
+}
+
+.pagina-publicacao form {
+    display: grid;
+    gap: 18px;
+}
+
+.pagina-publicacao form p {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin: 0;
+}
+
+.pagina-publicacao form label {
+    font-weight: 600;
+}
+
+.pagina-publicacao form input:not([type="checkbox"]):not([type="file"]),
+.pagina-publicacao form textarea {
+    width: 100%;
+    padding: 14px 16px;
+    border: 1px solid #283943;
+    border-radius: 14px;
+    background: #0b141b;
+    color: white;
+    font-family: inherit;
+    font-size: 15px;
+}
+
+.pagina-publicacao form textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+
+.pagina-publicacao form input[type="file"] {
+    width: 100%;
+    padding: 12px;
+    background: #0b141b;
+    color: white;
+    border: 1px solid #283943;
+    border-radius: 14px;
+    font-family: inherit;
+}
+
+.pagina-publicacao form input[type="checkbox"] {
+    accent-color: #dd63ff;
+}
+
+.pagina-publicacao form input:focus,
+.pagina-publicacao form textarea:focus {
+    outline: none;
+    border-color: #dd63ff;
+}
+
+.pagina-publicacao form button {
+    padding: 14px;
+    background: #dd63ff;
+    color: #080e12;
+    border: none;
+    border-radius: 14px;
+    font-family: inherit;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.pagina-publicacao form button:hover {
+    background: #bc62f0;
+}
+
+.pagina-publicacao .voltar-blog {
+    margin-top: 25px;
+    text-align: center;
+}
+
+.pagina-publicacao .voltar-blog a {
+    color: #dd63ff;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.pagina-publicacao .errorlist {
+    color: #ff7b91;
+    font-size: 14px;
+}
+
+/* RESPONSIVIDADE */
 @media (max-width: 900px) {
     .lista-publicacoes {
         grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -313,7 +399,12 @@ form button[type="submit"] {
     }
 }
 
-/* Responsividade para celulares */
+@media (max-width: 800px) {
+    .acoes-publicacao {
+        flex-direction: column;
+    }
+}
+
 @media (max-width: 600px) {
     .cabecalho {
         flex-direction: column;
@@ -351,20 +442,8 @@ form button[type="submit"] {
         padding: 15px;
     }
 
-    .acoes-publicacao {
-        flex-direction: row;
-    }
-}
-
-/* Nome do usuário conectado */
-.usuario-logado {
-    color: #f5b51b;
-    font-weight: bold;
-}
-
-/* Responsividade dos botões em celulares pequenos */
-@media (max-width: 800px) {
-    .acoes-publicacao {
-        flex-direction: column;
+    .pagina-publicacao main {
+        padding: 20px 15px;
+        margin: 20px auto;
     }
 }

@@ -1,37 +1,51 @@
+
 {% load static %}
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <link rel="stylesheet" href="{% static 'blog/css/blog.css' %}">
+
     <title>{{ titulo_pagina }} | Gold Box</title>
 </head>
-<body>
 
-    <header>
-        <h1>IRON BOX </h1>
-        <p>Blog de informações e novidades</p>
+<body class="pagina-publicacao">
+
+    <header class="cabecalho">
+        <div class="logo">
+            <h1>GOLD BOX</h1>
+            <p>Blog de informações e novidades</p>
+        </div>
     </header>
 
     <main>
-        <h2>{{ titulo_pagina }}</h2>
+        <div class="formulario-publicacao">
 
-       <form method="post" enctype="multipart/form-data">
-            {% csrf_token %}
+            <h2>{{ titulo_pagina }}</h2>
 
-            {{ form.as_p }}
+            <p class="descricao-formulario">
+                Preencha as informações para criar sua publicação.
+            </p>
 
-            <button type="submit">
-                Salvar publicação
-            </button>
-        </form>
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
 
-        <p>
-            <a href="{% url 'blog:post_list' %}">
-                Cancelar e voltar ao blog
-            </a>
-        </p>
+                {{ form.as_p }}
+
+                <button type="submit">
+                    Salvar publicação
+                </button>
+            </form>
+
+            <p class="voltar-blog">
+                <a href="{% url 'blog:post_list' %}">
+                    Cancelar e voltar ao blog
+                </a>
+            </p>
+
+        </div>
     </main>
 
 </body>
